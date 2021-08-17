@@ -26,7 +26,7 @@ import "../firebase/auth";*/
         alert('Tu correo ya esta registrado');
         // ..
      })
-     function sendEmailVerification() {
+     
         // [START auth_send_email_verification]
         firebase.auth().currentUser.sendEmailVerification()
           .then(() => {
@@ -34,7 +34,7 @@ import "../firebase/auth";*/
             // ...
           });
         // [END auth_send_email_verification]
-      }
+      
 
     });
 
