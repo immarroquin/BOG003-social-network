@@ -7,7 +7,7 @@ export const login = () => {
       <input type="password" id="password">
       <br>
       <br>
-      <a href="#/home">Iniciar sesión</a>
+      <a href="#/">iniciar Sesion</a>
       <button type="submit" id="btnRegister"> Iniciar Sesión</button>
       <a href="#/register">Registrate</a>
   </form>
