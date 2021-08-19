@@ -9,9 +9,9 @@ export const login = () => {
       <br>
       <a href="#/">iniciar Sesion</a>
       <button type="submit" id="btnRegister"> Iniciar Sesión</button>
-      <a href="#/register">Registrate</a>
+      
   </form>
-  <h1>Si no tienes cuenta <a href="#/register"></a></h1>
+  <p>Si no tienes cuenta <a href="#/register">Registrate</a></p>
   `
     return viewLogin;
 }
