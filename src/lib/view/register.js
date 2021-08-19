@@ -1,7 +1,8 @@
-/*import firebase from "../firebase/app";
-import "../firebase/auth";*/
+import {authEmailAndPassword} from '../index.js';
+
 
 export const register = () => {
+  const divRegister = document.createElement('div');   
   const viewRegister = `
 
 <form id="formRegister">
@@ -14,45 +15,24 @@ export const register = () => {
       <input type="password" id="password">
       <br>
       <br>
-      <button type="submit" id="btnRegister"> Crear Cuenta</button>
+      <button type="submit" id="btn-register">Crear Cuenta</button>
   </form> 
   
+  <p>ya te registraste <a href="#/">inicia sesion</a></p>
   `
-  return viewRegister;
+  divRegister.innerHTML = viewRegister;
+
+const btnRegister = divRegister.querySelector("#btn-register");
+btnRegister.addEventListener('click', () => {
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+  authEmailAndPassword(email, password);
+
+})
+
+  return divRegister;
 };
-// const formRegister = document.querySelector('#formRegister');
 
-// formRegister.addEventListener('submit', (e) => {
-//   e.preventDefault();
-
-
-//   const email = document.querySelector('#email').value;
-//   const password = document.querySelector('#password').value;
-//   firebase.auth().createUserWithEmailAndPassword(email, password)
-//     .then((userCredential) => {
-//       // Signed in
-//       formRegister.reset();
-//       alert("Tu correo se registro con exito");
-//       const user = userCredential.user;
-//       // ...
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//       alert('Tu correo ya esta registrado');
-//       // ..
-//     })
-
-//   // [START auth_send_email_verification]
-//   firebase.auth().currentUser.sendEmailVerification()
-//     .then(() => {
-//       // Email verification sent!
-//       // ...
-//     });
-//   // [END auth_send_email_verification]
-
-
-// });
 
 
 

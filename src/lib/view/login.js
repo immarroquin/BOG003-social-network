@@ -1,4 +1,5 @@
-export const login = () => {
+export const login = (hash) => {
+  const divLogin = document.createElement('div');  
     const viewLogin = `
     <form id="formLogin"> 
       <input type="email" id="email">
@@ -7,11 +8,11 @@ export const login = () => {
       <input type="password" id="password">
       <br>
       <br>
-      <a href="#/">iniciar Sesion</a>
-      <button type="submit" id="btnRegister"> Iniciar Sesión</button>
+      <a href="#/home">iniciar Sesion</a>
       
   </form>
   <p>Si no tienes cuenta <a href="#/register">Registrate</a></p>
   `
-    return viewLogin;
+  divLogin.innerHTML= viewLogin;
+    return divLogin;
 }
