@@ -1,5 +1,5 @@
 
-export const authEmailAndPassword = (email, password) =>{
+export const authEmailAndPassword = (email, password, names) =>{
  const formRegister = document.querySelector('#formRegister');
 
  formRegister.addEventListener('submit', (e) => {
@@ -8,23 +8,30 @@ export const authEmailAndPassword = (email, password) =>{
    firebase.auth().createUserWithEmailAndPassword(email, password)
      .then((userCredential) => {
        // Signed in
-       formRegister.reset();
-       alert("Tu correo se registro con exito");
+       userCredential.user.updateProfile({
+         displayName : names
+       })
        const user = userCredential.user;
+       alert("Tu correo se registro con exito");
+       location.reload()
        // ...
      })
     .catch((error) => {
-      formRegister.reset();
+     
        const errorCode = error.code;
        const errorMessage = error.message;
        alert('Tu correo ya esta registrado');
+       location.reload()
        // ..
      })
 
+     const configurationUrlEmail = {
+      url : 'http://localhost:5000'
+    }
 
 
    // [START auth_send_email_verification]
-   firebase.auth().currentUser.sendEmailVerification()
+   firebase.auth().currentUser.sendEmailVerification(configurationUrlEmail)
      .then(() => {
        // Email verification sent!
        // ...

@@ -22,7 +22,7 @@ const showTemplate = (hash) => {
   containerRoot.innerHTML = '';
 
   switch (hash) {
-    case "#/":
+    case "":
       containerRoot.appendChild(login());
       break;
     case "#/register":

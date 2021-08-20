@@ -18,15 +18,16 @@ export const register = () => {
       <button type="submit" id="btn-register">Crear Cuenta</button>
   </form> 
   
-  <p>ya te registraste <a href="#/">inicia sesion</a></p>
+  <p>ya te registraste <a href="">inicia sesion</a></p>
   `
   divRegister.innerHTML = viewRegister;
 
 const btnRegister = divRegister.querySelector("#btn-register");
 btnRegister.addEventListener('click', () => {
+  const names = document.querySelector('#name').value;
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
-  authEmailAndPassword(email, password);
+  authEmailAndPassword(email, password, names);
 
 })
 

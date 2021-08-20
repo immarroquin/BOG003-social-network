@@ -9,7 +9,7 @@ import {changeRoute} from './lib/router.js';
 
 document.getElementById('container').appendChild(login());
 const init = () => {
-    
+    changeRoute(window.location.hash);
     window.addEventListener('hashchange', () => {
      //myFunction();
      changeRoute(window.location.hash);
