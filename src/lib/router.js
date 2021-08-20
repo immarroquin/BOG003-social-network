@@ -16,13 +16,12 @@ export const changeRoute = (hash) => {
   }
 };
 
-
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('container');
   containerRoot.innerHTML = '';
 
   switch (hash) {
-    case "#/":
+    case "":
       containerRoot.appendChild(login());
       break;
     case "#/register":

@@ -1,4 +1,5 @@
 import {authEmailAndPassword} from '../index.js';
+import {validNameRegister} from '../index.js';
 //import {emailVerification} from '../index.js';
 
 export const register = () => {
@@ -14,20 +15,23 @@ export const register = () => {
       <br>
       <input type="password" id="password">
       <br>
-      <br>
-      <button type="submit" id="btn-register">Crear Cuenta</button>
   </form> 
-  
-  <p>ya te registraste <a href="#/">inicia sesion</a></p>
+
+  <div id="divErrorMessage" width:"100px" height:"100px" border:"solid"></div>
+
+  <button type="button" id="btn-register">Crear Cuenta</button>
+  <p>ya te registraste <a href="">inicia sesion</a></p>
   `
+
+
   divRegister.innerHTML = viewRegister;
 const btnRegister = divRegister.querySelector("#btn-register");
 btnRegister.addEventListener('click', () => {
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
-  authEmailAndPassword(email, password);
-
-
+  const names = document.querySelector('#name').value;
+  authEmailAndPassword(email, password, names);
+  validNameRegister(namesd);
 })
 
   return divRegister;
