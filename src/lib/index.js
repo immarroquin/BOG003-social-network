@@ -17,8 +17,10 @@ export const authEmailAndPassword = (email, password, names) =>{
        // ...
      })
     .catch((error) => {
-     
-       const errorCode = error.code;
+      
+        const divErroMessage = document.createElement('div');
+        divErroMessage.setAttribute('id', 'div-error-message');
+        const errorCode = error.code;
        const errorMessage = error.message;
        alert('Tu correo ya esta registrado');
        location.reload()
