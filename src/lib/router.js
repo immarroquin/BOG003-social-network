@@ -16,7 +16,6 @@ export const changeRoute = (hash) => {
   }
 };
 
-
 const showTemplate = (hash) => {
   const containerRoot = document.getElementById('container');
   containerRoot.innerHTML = '';
