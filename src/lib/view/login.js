@@ -6,24 +6,21 @@ export const login = (hash) => {
   const divLogin = document.createElement('div');
   divLogin.setAttribute('class', 'container-div-login')
   const viewLogin = `
-  <body id='body-login'>
-    <form id="formLogin"> 
-      <input type="email" id="email">
-      <br>
-      <br>
-      <input type="password" id="password">
-      <br>
-      <br>
-      
-  </form>
+  <img src="img/logolaborafdoblanco.png" alt="logoLaboratorians" class="img-logo-white">
+  <form id="formLogin"> 
+  <div class="input-login">
+    <input type="email" id="email">
+    <input type="password" id="password">
+  </div>
+</form>
   <div id="errorMessageLogin" width:"100px" height:"100px" border:"solid"></div>
-  
+  <div class="button-login">
   <button id="btn-login" >Iniciar Sesion</button>
   <button type="button" id="btn-google-login">Google Login</button>
- 
+  </div>
+  <div>
   <p>Si no tienes cuenta <a href="#/register">Registrate</a></p>
-  
-</body>
+  </div>
   `
   divLogin.innerHTML = viewLogin;
   const btnLogin = divLogin.querySelector("#btn-login");

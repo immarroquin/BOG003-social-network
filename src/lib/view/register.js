@@ -3,9 +3,13 @@ import {authEmailAndPassword, loginGoogle} from '../index.js';
 //import {emailVerification} from '../index.js';
 
 export const register = () => {
-  const divRegister = document.createElement('div');   
+  const divRegister = document.createElement('div');
+  document.body.classList.remove("styleBodyBlack");
+  document.body.classList.add("body");
+  
+  divRegister.setAttribute("id", "div-register");
   const viewRegister = `
-
+<img src="img/logolaborafdonegro.png" alt="logoLaboratorians" class="img-logo-white">
 <form id="formRegister">
       <input type="text" id="name">
       <br>

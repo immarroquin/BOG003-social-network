@@ -2,16 +2,37 @@
     padding: 0px;
     margin: 0px;
   }
-
   html {
     min-height: 100%;
     position: relative;
   }
+  .img-logo-white {
+    width: 50%;
+  }
+  .styleBodyBlack {
+    background-color: white;
+  }
+  body {
+    background-color:rgba(0, 0, 0, 0.79);
+  }
+  #container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+  }
+  .input-login {
+    display: flex;
+    flex-direction: column;
+  }
+  .button-login {
+    display: flex;
+    flex-direction: column;
+  }
+  #email, #password {
+    border-radius: 26px;
+    border: solid 1px;
+    margin-top: 50px;
 
-  #body-login {
+
     
-    background-color: rgb(144, 197, 82);
-    width: 100%;
-    height: 100%;
-
   }
