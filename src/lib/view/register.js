@@ -1,5 +1,5 @@
 import {authEmailAndPassword} from '../index.js';
-import {validNameRegister} from '../index.js';
+//import {validNameRegister} from '../index.js';
 //import {emailVerification} from '../index.js';
 
 export const register = () => {
@@ -30,8 +30,7 @@ btnRegister.addEventListener('click', () => {
   const names = document.querySelector('#name').value;
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
-  //const names = document.querySelector('#name').value;
-  authEmailAndPassword(email, password);
+  authEmailAndPassword(email, password, names);
   
 })
 
