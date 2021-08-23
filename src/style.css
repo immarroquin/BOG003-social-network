@@ -1,0 +1,17 @@
+* {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  html {
+    min-height: 100%;
+    position: relative;
+  }
+
+  #body-login {
+    
+    background-color: rgb(144, 197, 82);
+    width: 100%;
+    height: 100%;
+
+  }

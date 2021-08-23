@@ -1,4 +1,4 @@
-import {authEmailAndPassword} from '../index.js';
+import {authEmailAndPassword, loginGoogle} from '../index.js';
 //import {validNameRegister} from '../index.js';
 //import {emailVerification} from '../index.js';
 
@@ -15,11 +15,14 @@ export const register = () => {
       <br>
       <input type="password" id="password">
       <br>
+      
   </form> 
-
+  
   <div id="errorMessageRegister" width:"100px" height:"100px" border:"solid"></div>
 
   <button type="button" id="btn-register">Crear Cuenta</button>
+  <button type="button" id="btn-google-register">Google Register</button>
+
   <p>ya te registraste <a href="">inicia sesion</a></p>
   `
 
@@ -30,10 +33,24 @@ btnRegister.addEventListener('click', () => {
   const names = document.querySelector('#name').value;
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
-  authEmailAndPassword(email, password, names);
+  const errorMessage = document.querySelector('#errorMessageRegister');
+  if(names !== ""){
+    authEmailAndPassword(email, password, names);
+  }else {
+    errorMessage.innerHTML = 'Nombre invalido';
+  }
+  
+  
 })
 
+const btnGoogleRegister = divRegister.querySelector("#btn-google-register");
+btnGoogleRegister.addEventListener('click', () => {
+  loginGoogle();
+
+
+})
   return divRegister;
+
 };
 
 
