@@ -16,14 +16,10 @@ export const register = () => {
       <input type="password" id="password">
       <br>
   </form> 
-<<<<<<< HEAD
-  
-=======
 
   <div id="divErrorMessage" width:"100px" height:"100px" border:"solid"></div>
 
   <button type="button" id="btn-register">Crear Cuenta</button>
->>>>>>> c64f9f3a3df9fadc8091d39077ede1b27b7a8646
   <p>ya te registraste <a href="">inicia sesion</a></p>
   `
 
@@ -34,14 +30,9 @@ btnRegister.addEventListener('click', () => {
   const names = document.querySelector('#name').value;
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
-<<<<<<< HEAD
-  authEmailAndPassword(email, password, names);
-
-=======
-  const names = document.querySelector('#name').value;
-  authEmailAndPassword(email, password, names);
-  validNameRegister(namesd);
->>>>>>> c64f9f3a3df9fadc8091d39077ede1b27b7a8646
+  //const names = document.querySelector('#name').value;
+  authEmailAndPassword(email, password);
+  
 })
 
   return divRegister;
