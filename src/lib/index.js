@@ -1,3 +1,6 @@
+// eslint-disable-next-line
+import { defaultApp } from "../configfirebase.js";
+
 export const authEmailAndPassword = (email, password, names) => { //authEmailAndPassword es la funcion que contiene los 3 parametro para registrarse
   const formRegister = document.querySelector('#formRegister');
   firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -104,22 +107,21 @@ export const signOut = () =>{
 
 export const loginGoogle = () => {
   // [START auth_google_provider_create]
-  var provider = new firebase.auth.GoogleAuthProvider();
+  const provider = new firebase.auth.GoogleAuthProvider();
   // [START auth_google_signin_popup]
   firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
-      var credential = result.credential;
+      const credential = result.credential;
       window.location.href="#/home";
       // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = credential.accessToken;
+      const token = credential.accessToken;
       // The signed-in user info.
-      var user = result.user;
+      const user = result.user;
       // ...
-      
+      console.log(user);
     })
-    
     .catch((error) => {
       // Handle Errors here.
       var errorCode = error.code;
@@ -133,6 +135,7 @@ export const loginGoogle = () => {
   // [END auth_google_signin_popup]
   
   }
+
 
 
 

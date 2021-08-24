@@ -1,38 +1,67 @@
 * {
-    padding: 0px;
-    margin: 0px;
-  }
-  html {
-    min-height: 100%;
-    position: relative;
-  }
-  .img-logo-white {
-    width: 50%;
-  }
-  .styleBodyBlack {
-    background-color: white;
-  }
-  body {
-    background-color:rgba(0, 0, 0, 0.79);
-  }
-  #container {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-  }
-  .input-login {
-    display: flex;
-    flex-direction: column;
-  }
-  .button-login {
-    display: flex;
-    flex-direction: column;
-  }
-  #email, #password {
-    border-radius: 26px;
-    border: solid 1px;
-    margin-top: 50px;
+  padding: 0px;
+  margin: 0px;
+}
 
+html {
+  min-height: 100%;
+  position: relative;
+}
 
-    
-  }
+.img-logo-white {
+  width: 85%;
+}
+
+.container-div-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.styleBodyBlack {
+  background-color: white;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.79);
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.input-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#btn-login{
+  height: 2.5em;
+    width: 15em;
+    border-radius: 20px;
+}
+#email,
+#password {
+  border-radius: 26px;
+  border: solid 1px;
+  margin-top: 50px;
+  width: 20em;
+  height: 2.5em;
+}
+#btn-google-login{
+border: none;
+background-color: transparent;
+width: 6em;
+
+}
+#img-google{
+  width: 50px;
+}

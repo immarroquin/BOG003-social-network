@@ -16,9 +16,9 @@ export const login = (hash) => {
   <div id="errorMessageLogin" width:"100px" height:"100px" border:"solid"></div>
   <div class="button-login">
   <button id="btn-login" >Iniciar Sesion</button>
-  <button type="button" id="btn-google-login">Google Login</button>
-  </div>
-  <div>
+  <p>Tambien puedes iniciar sesión con Google</p>
+  <button type="button" id="btn-google-login">
+  <img src="img/google.png" id="img-google"></button>
   <p>Si no tienes cuenta <a href="#/register">Registrate</a></p>
   </div>
   `
