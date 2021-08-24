@@ -13,13 +13,13 @@ export const login = (hash) => {
     <input type="password" id="password">
   </div>
 </form>
-  <div id="errorMessageLogin" width:"100px" height:"100px" border:"solid"></div>
-  <div class="button-login">
+  <div id='errorMessageLogin' width:"100px" height:"100px" border:"solid"></div>
+  <div class="div-login">
   <button id="btn-login" >Iniciar Sesion</button>
-  <p>Tambien puedes iniciar sesión con Google</p>
+  <p>Tambien puedes iniciar sesión con:</p>
   <button type="button" id="btn-google-login">
   <img src="img/google.png" id="img-google"></button>
-  <p>Si no tienes cuenta <a href="#/register">Registrate</a></p>
+  <p>Si no tienes cuenta <a href="#/register" id='link-register'>Registrate</a></p>
   </div>
   `
   divLogin.innerHTML = viewLogin;
