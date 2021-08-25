@@ -9,15 +9,15 @@ export const login = (hash) => {
   <img src="img/logolaborafdoblanco.png" alt="logoLaboratorians" class="img-logo-white">
   <form id="formLogin"> 
   <div class="input-login">
-    <input type="email" id="email">
-    <input type="password" id="password">
+    <input type="email" id="email" placeholder='Correo@ejemplo.com'>
+    <input type="password" id="password" placeholder='Contraseña'>
   </div>
 </form>
-  <div id='errorMessageLogin' width:"100px" height:"100px" border:"solid"></div>
+  <div id='errorMessageLogin'></div>
   <div class="div-login">
-  <button id="btn-login" >Iniciar Sesion</button>
-  <p>Tambien puedes iniciar sesión con:</p>
-  <button type="button" id="btn-google-login">
+  <button id="btn-login" >INICIAR SESIÓN</button>
+  <p>Tambien puedes iniciar sesión con</p>
+  <button type="button" class="btn-google">
   <img src="img/google.png" id="img-google"></button>
   <p>Si no tienes cuenta <a href="#/register" id='link-register'>Registrate</a></p>
   </div>
@@ -30,7 +30,7 @@ export const login = (hash) => {
     signIn(email, password);
     authLogin();
   })
-  const btnGoogleLogin = divLogin.querySelector("#btn-google-login");
+  const btnGoogleLogin = divLogin.querySelector(".btn-google");
   btnGoogleLogin.addEventListener('click', () => {
     loginGoogle();
     

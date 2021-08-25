@@ -8,64 +8,71 @@ html {
   position: relative;
 }
 
-.img-logo-white {
-  width: 85%;
-  margin-top: 20%;
-}
-
-.container-div-login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.styleBodyBlack {
-  background-color: white;
-}
-
 body {
   background-color: rgba(0, 0, 0, 0.79);
 }
 
-#container {
+.styleBodyBlack {        /*fondo blanco pantalla login*/
+  background-color: white;
+}
+
+#container {           /*contenedor general (contiene todas las pantallas*/
   display: flex;
   justify-content: center;
   height: 100%;
 }
 
-.input-login {
+.img-logo-white { /*Logos*/
+  width: 85%;
+  margin-top: 20%;
+}
+
+.container-div-login { /*contenedor padre de la seccion login*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-login { /*contenedor padre de los input de login*/
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10%;
 }
 #email,
-#password {
+#password {  /*input de login*/
   border-radius: 25px;
-  border: solid 1px;
+  border: solid 2px;
   width: 320px;
   height: 45px;
   margin-top: 10%;
+  outline: none;
+  text-align: center;
+  font-size: large;
+  font-family:'Roboto';
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+ 
 }
-#errorMessageLogin{
+#errorMessageLogin{ /*contenedor mensaje de error de login*/
   margin-top: 5%;
   font-size: 20px;
   font-weight: bolder;
   font-family: 'Roboto';
   color:red;
 }
-.div-login {
+.div-login {  /*contenedor de boton, parrafos y logo google login*/
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10%;
 }
-.div-login p{
+.div-login p{ 
 font-size: 23px;
 margin-top: 10%;
 font-family: 'Roboto';
 }
-#btn-login{
+#btn-login{ /*botones de logueo y registro*/
   cursor: pointer;
   height: 45px;
     width: 250px;
@@ -74,22 +81,108 @@ font-family: 'Roboto';
     font-size: 25px;
     background-color:rgb(0,255,171);
     border: none;
+    outline: none;
 }
 #btn-login:hover{
   /* background-color:rgb(0,255,171); */
   box-shadow: 2px 4px 4px 4px #6f7274;
 }
 
-#btn-google-login{
+.btn-google{  /*boton contenedor del logo de google para logueo y registro*/
 border: none;
 background-color: transparent;
 width: 100px;
 margin-top: 10%;
 cursor: pointer;
 }
-#img-google{
+
+#img-google{  /*imagen de google*/
   width: 50px;
 }
-#link-register{
+
+#link-register{ /*etiqueta <a> con el link de resgister en pantalla login*/
   color: rgb(255, 0, 212);
+}
+
+.container-div-register { /*contenedor padre de la seccion register*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.input-register { /*contenedor padre de los input de register*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7%
+}
+#name-register,
+#email-register,
+#password-register {  /*input de register*/
+  border-radius: 25px;
+  border: solid 2px white;
+  width: 320px;
+  height: 45px;
+  margin-top: 7%;
+  background-color: transparent;
+  outline: none;
+  text-align: center;
+  font-size: large;
+  font-family:'Roboto';
+  font-weight: bolder;
+  color: aliceblue;
+}
+
+#errorMessageRegister{ /*contenedor mensaje de error register*/
+  margin-top: 7%;
+  font-size: 15px;
+  font-family: 'Roboto'; 
+  color: rgb(255, 0, 0); 
+  width: 280px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.div-register{  /*contenedor de boton, parrafos y logo google register*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  
+}
+
+.div-register p{ 
+font-size: 22px;
+margin-top: 7%;
+font-family: 'Roboto';
+color: white;
+}
+
+#btn-register{ /*botones de logueo y registro*/
+  cursor: pointer;
+  height: 45px;
+  width: 250px;
+  border-radius: 20px;
+  font-family:'Righteous';
+  font-size: 25px;
+ background-color:rgb(0,255,171);
+ border: none;
+ outline: none;
+}
+#btn-register:hover{
+
+  box-shadow: 4px 6px 4px 6px #1d1d1def, 0 4px 0 8px #3b3b3bef;
+}
+
+#link-login{ /*etiqueta <a> con el link de login en pantalla register*/
+  color: rgb(255, 238, 0);
+}
+
+#modal-content {
+height: 50px;
+width: 150px;
+background-color: violet;
+color: black;
+font-size: large;
+display: none;
 }

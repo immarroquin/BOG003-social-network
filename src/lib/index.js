@@ -14,7 +14,7 @@ export const authEmailAndPassword = (email, password, names) => { //authEmailAnd
         }
         firebase.auth().currentUser.sendEmailVerification(configurationUrlEmail) //Metodo sendEmailVerification para enviar correo de verificación al registrarse
       })
-      alert("Tu correo se registro con exito");
+     alert('Cuenta creada verifica tu correo');
       const user = userCredential.user;
       formRegister.reset();
     })
@@ -27,7 +27,7 @@ export const authEmailAndPassword = (email, password, names) => { //authEmailAnd
           errorMessage.innerHTML = 'El correo debe ser válido';
           break;
         case 'auth/weak-password':
-          errorMessage.innerHTML = 'La contraseña debe contener al menos seis caracteres';
+          errorMessage.innerHTML = 'La contraseña debe contener mínimo seis caracteres';
           break;
         case 'auth/email-already-in-use':
           errorMessage.innerHTML = 'Tu correo ya esta registrado, inicia sesión';
