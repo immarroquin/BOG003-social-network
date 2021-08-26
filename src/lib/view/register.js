@@ -4,9 +4,6 @@ import {authEmailAndPassword, loginGoogle} from '../index.js';
 
 export const register = () => {
   const divRegister = document.createElement('div');
-  document.body.classList.remove("styleBodyBlack");
-  document.body.classList.add("body");
-  
   divRegister.setAttribute("class", "container-div-register");
   const viewRegister = `
 <img src="img/logolaborafdonegro.png" alt="logoLaboratorians" class="img-logo-white">
@@ -15,6 +12,11 @@ export const register = () => {
       <input type="text" id="name-register" placeholder='Escribe tu nombre'>
       <input type="email" id="email-register" placeholder='Correo@ejemplo.com'>
       <input type="password" id="password-register" placeholder='Contraseña'>
+
+    <div id='modalContent'>
+      <div id='textModal'></div>
+      <img src="img/check.png" alt="verifiedCheck" class="img-check">
+    </div>
  </div>       
   </form> 
   <div id="errorMessageRegister"></div>
@@ -31,21 +33,26 @@ export const register = () => {
 
   </div>
   `
-
-
-  divRegister.innerHTML = viewRegister;
+divRegister.innerHTML = viewRegister;
 const btnRegister = divRegister.querySelector('#btn-register');
 btnRegister.addEventListener('click', () => {
   const names = document.querySelector('#name-register').value;
   const email = document.querySelector('#email-register').value;
   const password = document.querySelector('#password-register').value;
   const errorMessage = document.querySelector('#errorMessageRegister');
+  errorMessage.innerHTML = '';
   if(names !== ""){
     authEmailAndPassword(email, password, names);
-  }else {
+   } 
+  // else if (authEmailAndPassword(email, password, names) == true) {
+  //   console.log("Hola modal");
+  //   document.getElementById('modalContent').style.display = 'block';
+  //   document.getElementById('textModal').innerHTML = 'Cuenta creada con exito, verifica tu correo';
+  // }
+  else {
     errorMessage.innerHTML = 'Nombre invalido';
   }
- 
+  
   
 })
 

@@ -14,13 +14,21 @@ export const authEmailAndPassword = (email, password, names) => { //authEmailAnd
         }
         firebase.auth().currentUser.sendEmailVerification(configurationUrlEmail) //Metodo sendEmailVerification para enviar correo de verificación al registrarse
       })
-     alert('Cuenta creada verifica tu correo');
+    //  alert('Cuenta creada verifica tu correo');
+    console.log("Hola modal");
+    document.querySelector('#modalContent').style.display = 'flex';
+    document.querySelector('#textModal').innerHTML = 'Cuenta creada con exito, verifica tu correo';
+     setTimeout(function(){ 
+       document.querySelector('#modalContent').style.display = "none"; 
+       }, 3000);
+
       const user = userCredential.user;
       formRegister.reset();
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = document.querySelector('#errorMessageRegister');
+    
       //Creamos casos de error para registro de usuario nuevo
       switch (errorCode) {
         case 'auth/invalid-email':
@@ -36,6 +44,7 @@ export const authEmailAndPassword = (email, password, names) => { //authEmailAnd
           errorMessage.innerHTML = 'Ups algo falló';
           break;
       }
+      
       /*firebase.auth().currentUser;
       const inputName = document.querySelector("#name").value
       if (userName !== null){  
@@ -44,7 +53,7 @@ export const authEmailAndPassword = (email, password, names) => { //authEmailAnd
         alert('Nombre invalido');
       }*/
     })
-
+    
     
 
   return formRegister
