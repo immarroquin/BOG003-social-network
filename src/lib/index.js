@@ -22,8 +22,7 @@ export const authEmailAndPassword = (email, password, names) => {
       setTimeout(() => {
         document.querySelector('#modalContent').style.display = 'none';
       }, 3000);
-
-      const user = userCredential.user;
+      // const user = userCredential.user;
       formRegister.reset();
     })
     .catch((error) => {
@@ -55,8 +54,8 @@ export const signIn = (email, password) => {
   const formLogin = document.querySelector('#formLogin');
   firebase.auth().signInWithEmailAndPassword(email, password)
   // Usamos el metodo signInWithEmailAndPassword autenticar a usuario registrado
-    .then((userCredential) => {
-      const user = userCredential.user;
+    .then(() => {
+      // const user = userCredential.user;
       formLogin.reset();
       // metodo reset() para limpiar formulario
     })
@@ -88,6 +87,7 @@ export const authLogin = () => {
   const userLogin = firebase.auth().onAuthStateChanged((user) => {
   // Usamos el metodo onAuthStateChanged para verificar el estado de autenticacion
     if (user) {
+      // eslint-disable-next-line
       const uid = user.uid;
       window.location.href = '#/home';
       // en caso de que se cumpla user se direccion la ruta home
@@ -111,15 +111,23 @@ export const loginGoogle = () => {
     .signInWithPopup(provider)
     .then((result) => {
       /* @type {firebase.auth.OAuthCredential} */
+      // eslint-disable-next-line
       const credential = result.credential;
       window.location.href = '#/home';
+      // eslint-disable-next-line
       const token = credential.accessToken;
+      // eslint-disable-next-line
       const user = result.user;
     })
     .catch((error) => {
+      // eslint-disable-next-line
       const errorCode = error.code;
+      // eslint-disable-next-line
       const errorMessage = error.message;
+      // eslint-disable-next-line
       const email = error.email;
+      // eslint-disable-next-line
       const credential = error.credential;
     });
 };
+defaultApp();
