@@ -24,16 +24,16 @@ export const authEmailAndPassword = (email, password, names) => { //authEmailAnd
       //Creamos casos de error para registro de usuario nuevo
       switch (errorCode) {
         case 'auth/invalid-email':
-          errorMessage.innerHTML = 'El correo debe ser válido';
+          errorMessage.innerHTML = '⚠️ El correo debe ser válido';
           break;
         case 'auth/weak-password':
-          errorMessage.innerHTML = 'La contraseña debe contener mínimo seis caracteres';
+          errorMessage.innerHTML = ' ⚠️ La contraseña debe contener mínimo seis caracteres';
           break;
         case 'auth/email-already-in-use':
-          errorMessage.innerHTML = 'Tu correo ya esta registrado, inicia sesión';
+          errorMessage.innerHTML = '⚠️ Tu correo ya esta registrado, inicia sesión';
           break;
         default:
-          errorMessage.innerHTML = 'Ups algo falló';
+          errorMessage.innerHTML = '⚠️ Ups algo falló';
           break;
       }
       /*firebase.auth().currentUser;

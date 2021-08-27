@@ -43,7 +43,7 @@ btnRegister.addEventListener('click', () => {
   if(names !== ""){
     authEmailAndPassword(email, password, names);
   }else {
-    errorMessage.innerHTML = 'Nombre invalido';
+    errorMessage.innerHTML = '⚠️ Nombre invalido';
   }
  
   
