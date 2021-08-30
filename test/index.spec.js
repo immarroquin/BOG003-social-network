@@ -30,19 +30,20 @@ describe('signIn', () => {
   it('debería ser una función', () => {
     expect(typeof signIn).toBe('function');
   });
-  it('deberia poder iniciar sesion con correo y contraseña', async () => {
-    await signIn('laboratorians@hotmail.com', '123456');
-    console.log(window.location);
-    expect(window.location.href).toBe('#/home');
+  it('deberia poder iniciar sesion con correo y contraseña', () => {
+    signIn('laboratorians@hotmail.com', '123456');
+    firebase.auth().signInWithEmailAndPassword('laboratorians@hotmail.com', '123456').then((user) => {
+      expect(user).toBe('Te registraste con exito');
+    });
   });
 });
 describe('signOut', () => {
   it('debería ser una función', () => {
     expect(typeof signOut).toBe('function');
   });
-  it('deberia poder cerrar sesion', async () => {
-    await signOut().then((user) => {
-      expect(user).toBe(undefined);
+  it('deberia poder cerrar sesion', () => {
+    signOut().then(() => {
+      expect(window.location.href).toBe('');
     });
   });
 });
