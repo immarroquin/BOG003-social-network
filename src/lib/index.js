@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import {defaultApp} from '../configfirebase.js';
+// import {defaultApp} from '../configfirebase.js';
 
 export const authEmailAndPassword = (email, password, names) => {
   // authEmailAndPassword es la funcion que contiene los 3 parametro para registrarse
@@ -130,4 +130,3 @@ export const loginGoogle = () => {
       const credential = error.credential;
     });
 };
-defaultApp();

@@ -2,8 +2,8 @@ import {
   authEmailAndPassword,
   signIn,
   signOut,
-/* authLogin,
-  loginGoogle, */
+  authLogin,
+  loginGoogle,
 } from '../src/lib/index.js';
 
 const firebasemock = require('firebase-mock');
@@ -13,15 +13,15 @@ const mocksdk = new firebasemock.MockFirebaseSdk(
   () => null,
   () => mockauth,
 );
-mockauth.autoFlush();
 global.firebase = mocksdk;
+mocksdk.auth().autoFlush();
 
 describe('authEmailAndPassword', () => {
   it('debería ser una función', () => {
     expect(typeof authEmailAndPassword).toBe('function');
   });
-  it('Registrarse con correo y contraseña', async () => {
-    await authEmailAndPassword('laboratorians@hotmail.com', '123456').then((user) => {
+  it('Registrarse con correo y contraseña', () => {
+    authEmailAndPassword('laboratorians@hotmail.com', '123456').then((user) => {
       expect(user.email).toBe('laboratorians@hotmail.com');
     });
   });
@@ -32,7 +32,8 @@ describe('signIn', () => {
   });
   it('deberia poder iniciar sesion con correo y contraseña', async () => {
     await signIn('laboratorians@hotmail.com', '123456');
-    expect(window.location.hash).toBe('#/home');
+    console.log(window.location);
+    expect(window.location.href).toBe('#/home');
   });
 });
 describe('signOut', () => {
@@ -45,7 +46,7 @@ describe('signOut', () => {
     });
   });
 });
-/* describe('authLogin', () => {
+describe('authLogin', () => {
   it('debería ser una función', () => {
     expect(typeof authLogin).toBe('function');
   });
@@ -54,4 +55,4 @@ describe('loginGoogle', () => {
   it('debería ser una función', () => {
     expect(typeof loginGoogle).toBe('function');
   });
-}); */
+});
