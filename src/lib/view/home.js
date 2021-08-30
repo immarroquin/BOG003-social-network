@@ -1,6 +1,8 @@
 import {
   signOut,
 } from '../index.js';
+// eslint-disable-next-line
+import {defaultApp} from '../configfirebase.js';
 
 export const home = () => {
   const divHome = document.createElement('div');

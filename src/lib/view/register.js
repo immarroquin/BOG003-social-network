@@ -2,6 +2,8 @@ import {
   authEmailAndPassword,
   loginGoogle,
 } from '../index.js';
+// eslint-disable-next-line
+import { defaultApp } from '../configfirebase.js';
 
 export const register = () => {
   const divRegister = document.createElement('div');
@@ -31,19 +33,50 @@ export const register = () => {
 
   <p>¿Ya te registraste? <a href='' id='link-login'>Inicia sesión</a></p>
   
-
   </div>
   `;
   divRegister.innerHTML = viewRegister;
   const btnRegister = divRegister.querySelector('#btn-register');
   btnRegister.addEventListener('click', () => {
+    const formRegister = document.querySelector('#formRegister');
     const names = document.querySelector('#name-register').value;
     const email = document.querySelector('#email-register').value;
     const password = document.querySelector('#password-register').value;
     const errorMessage = document.querySelector('#errorMessageRegister');
     errorMessage.innerHTML = '';
+
     if (names !== '') {
-      authEmailAndPassword(email, password, names);
+      // usamos el metodo createUserWithEmailAndPassword para crear usuario con email y password
+      authEmailAndPassword(email, password, names)
+        .then(() => {
+          document.querySelector('#modalContent').style.display = 'flex';
+          document.querySelector('#textModal').innerHTML = 'Cuenta creada con exito, verifica tu correo';
+          setTimeout(() => {
+            document.querySelector('#modalContent').style.display = 'none';
+          }, 3000);
+          // const user = userCredential.user;
+          formRegister.reset();
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+
+          // Creamos casos de error para registro de usuario nuevo
+          switch (errorCode) {
+            case 'auth/invalid-email':
+              errorMessage.innerHTML = '⚠️ El correo debe ser válido';
+              break;
+            case 'auth/weak-password':
+              errorMessage.innerHTML = '⚠️ La contraseña debe contener mínimo seis caracteres';
+              break;
+            case 'auth/email-already-in-use':
+              errorMessage.innerHTML = '⚠️ Tu correo ya esta registrado, inicia sesión';
+              break;
+
+            default:
+              errorMessage.innerHTML = 'Ups algo falló';
+              break;
+          }
+        });
     } else {
       errorMessage.innerHTML = '⚠️ Nombre invalido';
     }
