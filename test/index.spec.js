@@ -65,8 +65,10 @@ describe('loginGoogle', () => {
 
   it('debería tomar las credenciales de google y direccionar al usuario a una nueva ruta', () => {
     loginGoogle('laboratorians@hotmail.com');
-    firebase.auth().signInWithPopup('laboratorians@gmail.com').then(() => {
-      expect(window.location.href).toBe('#/home');
+    console.log('HOLAAAA');
+    firebase.auth().signInWithPopup('laboratorians@gmail.com').then((response) => {
+      console.log(response);
+      expect(response).toBe('#/home');
     });
   });
 });

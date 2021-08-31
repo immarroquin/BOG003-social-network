@@ -1,3 +1,6 @@
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
 export const authEmailAndPassword = (email, password, names) => {
   // authEmailAndPassword es la funcion que contiene los 3 parametro para registrarse
   const createUser = firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -45,8 +48,10 @@ export const signOut = () => {
 
 export const loginGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithPopup(provider)
+  return firebase.auth().signInWithPopup(provider)
     .then(() => {
       window.location.href = '#/home';
     });
 };
+
+// Comienzo de Firestore
