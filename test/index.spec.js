@@ -51,9 +51,22 @@ describe('authLogin', () => {
   it('debería ser una función', () => {
     expect(typeof authLogin).toBe('function');
   });
+  it('deberia verificar usuario ya registrado y direccionarlo a una nueva ruta', () => {
+    authLogin('laboratorians@hotmail.com', '123456');
+    firebase.auth().onAuthStateChanged((user) => {
+      expect(user).toBe('#/home');
+    });
+  });
 });
 describe('loginGoogle', () => {
   it('debería ser una función', () => {
     expect(typeof loginGoogle).toBe('function');
+  });
+
+  it('debería tomar las credenciales de google y direccionar al usuario a una nueva ruta', () => {
+    loginGoogle('laboratorians@hotmail.com');
+    firebase.auth().signInWithPopup('laboratorians@gmail.com').then(() => {
+      expect(window.location.href).toBe('#/home');
+    });
   });
 });
