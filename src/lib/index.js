@@ -1,7 +1,7 @@
 export const authEmailAndPassword = (email, password, names) => {
   // authEmailAndPassword es la funcion que contiene los 3 parametro para registrarse
   const createUser = firebase.auth().createUserWithEmailAndPassword(email, password)
-  // usamos el metodo createUserWithEmailAndPassword para crear usuario con email y password
+    // usamos el metodo createUserWithEmailAndPassword para crear usuario con email y password
     .then((userCredential) => {
       userCredential.user.updateProfile({
         // Metodo updateProfile para obtener el nombre registrado
@@ -26,7 +26,7 @@ export const signIn = (email, password) => {
 export const authLogin = () => {
   // authLogin es la funcion para verificar usuario ya registrado y direccionarlo a nueva ruta
   const userLogin = firebase.auth().onAuthStateChanged((user) => {
-  // Usamos el metodo onAuthStateChanged para verificar el estado de autenticacion
+    // Usamos el metodo onAuthStateChanged para verificar el estado de autenticacion
     if (user) {
       window.location.href = '#/home';
       // en caso de que se cumpla user se direccion la ruta home
@@ -53,16 +53,29 @@ export const loginGoogle = () => {
 
 // Comienzo de Firestore
 
-export const post = (describe) => {  
-const db = firebase.firestore();
-db.collection('posts').add({
-description: describe
-})
-.then((docRef) => {  
-console.log('id del post creador', docRef.id);
-})
-.catch((error) => {  
-  console.error('id errado', error);
-  });
+
+export const post = (describe) => {
+  const db = firebase.firestore();
+  db.collection('posts').add({
+    description: describe,
+  })
+    .then((docRef) => {
+      console.log('id del post creador', docRef.id);
+    })
+    .catch((error) => {
+      console.error('id errado', error);
+    });
 };
 
+ export const getPost = () => {
+   firebase.firestore().collection('posts').get().then((querySnapshot) => {
+     querySnapshot.forEach((doc) => {
+       console.log(doc.data());
+     })
+   }
+   )};
+ 
+
+//  export const getPost = () => firebase.firestore().collection('posts').get();
+ 
+ 

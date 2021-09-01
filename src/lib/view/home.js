@@ -1,6 +1,7 @@
 import {
   signOut,
   post,
+  getPost,
 } from '../index.js';
 // eslint-disable-next-line
 import {defaultApp} from '../configfirebase.js';
@@ -18,10 +19,11 @@ export const home = () => {
            <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
           <button type='button' id='btn-post'>PUBLICAR</button>
      </div>
-     
+    
   </div>
   <div id='div-post'></div>
 </div>
+<button type='button' id='btn-Mostrar'>Mostrar post</button>
 <button type='button' id='btn-signout'>Cerrar Sesion</button>
 `;
   divHome.innerHTML = viewHome;
@@ -36,11 +38,32 @@ export const home = () => {
         post(describe);
         document.querySelector('#modal-background-post').style.display = 'none';
         document.querySelector('#modal-content-post').style.display = 'none';
-       document.querySelector('#div-post').innerHTML = describe;
-       document.querySelector('#div-post').style.display ='block';
-           });
-          
-         const btnSignOut = divHome.querySelector('#btn-signout');
+        document.getElementById('div-post').appendChild(getPost());
+
+    });
+
+    
+    // getPost()
+    // const divPost = document.querySelector('#div-post');
+  
+    
+    
+    // const btnMostrar = 
+    // const querySnapshot = await getPost();
+    //   querySnapshot.forEach(doc => {
+        
+    
+    //     });
+    // document.addEventListener('DOMContentLoaded', (event) => {
+    //   console.log('DOM fully loaded and parsed');
+    // });
+
+    //  window.addEventListener('DOMContentLoaded', e => {
+    //    console.log(e + "Laboratorians");
+      
+      //  });
+
+  const btnSignOut = divHome.querySelector('#btn-signout');
   btnSignOut.addEventListener('click', () => {
     signOut();
   });
