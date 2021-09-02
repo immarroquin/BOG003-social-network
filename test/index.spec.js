@@ -31,10 +31,10 @@ describe('signIn', () => {
     expect(typeof signIn).toBe('function');
   });
   it('deberia poder iniciar sesion con correo y contraseña', () => {
-    signIn('laboratorians@hotmail.com', '123456');
-    firebase.auth().signInWithEmailAndPassword('laboratorians@hotmail.com', '123456').then((user) => {
-      expect(user).toBe('Te registraste con exito');
-    });
+    signIn('laboratorians@hotmail.com', '123456')
+      .then((user) => {
+        expect(user).toBe('Te registraste con exito');
+      });
   });
 });
 describe('signOut', () => {
@@ -42,8 +42,8 @@ describe('signOut', () => {
     expect(typeof signOut).toBe('function');
   });
   it('deberia poder cerrar sesion', () => {
-    signOut().then(() => {
-      expect(window.location.href).toBe('');
+    signOut().then((response) => {
+      expect(response).toBe('');
     });
   });
 });
