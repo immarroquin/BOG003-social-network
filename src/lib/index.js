@@ -54,7 +54,7 @@ export const loginGoogle = () => {
 // Comienzo de Firestore
 
 export const post = (describe) => {  
-const db = firebase.firestore();
+  const db = firebase.firestore();
 db.collection('posts').add({
 description: describe
 })
@@ -66,3 +66,10 @@ console.log('id del post creador', docRef.id);
   });
 };
 
+export const getPost = () => {
+  firebase.firestore().collection('posts').get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id} => ${doc.data().description}`);
+    })
+  }
+  )};

@@ -1,6 +1,7 @@
 import {
   signOut,
   post,
+  getPost,
 } from '../index.js';
 // eslint-disable-next-line
 import {defaultApp} from '../configfirebase.js';
@@ -36,10 +37,11 @@ export const home = () => {
         post(describe);
         document.querySelector('#modal-background-post').style.display = 'none';
         document.querySelector('#modal-content-post').style.display = 'none';
-       document.querySelector('#div-post').innerHTML = describe;
-       document.querySelector('#div-post').style.display ='block';
+        
            });
+           getPost();  
           
+           
          const btnSignOut = divHome.querySelector('#btn-signout');
   btnSignOut.addEventListener('click', () => {
     signOut();
