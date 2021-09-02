@@ -1,10 +1,11 @@
 import {
   signOut,
   post,
-  getPost,
+  getPosts,
+  onGetPost,
 } from '../index.js';
 // eslint-disable-next-line
-import {defaultApp} from '../configfirebase.js';
+import { defaultApp } from '../configfirebase.js';
 
 export const home = () => {
   const divHome = document.createElement('div');
@@ -28,40 +29,55 @@ export const home = () => {
 `;
   divHome.innerHTML = viewHome;
   const btnInputModal = divHome.querySelector('#btn-input-modal');
-  btnInputModal.addEventListener('click', () => { 
-      document.querySelector('#modal-background-post').style.display = 'block';
-      document.querySelector('#modal-content-post').style.display = 'block';
-   });
-   const btnPost = divHome.querySelector('#btn-post');
-      btnPost.addEventListener('click', () => { 
-        const describe = document.querySelector('#input-post').value;
-        post(describe);
-        document.querySelector('#modal-background-post').style.display = 'none';
-        document.querySelector('#modal-content-post').style.display = 'none';
-        document.getElementById('div-post').appendChild(getPost());
+  btnInputModal.addEventListener('click', () => {
+    document.querySelector('#modal-background-post').style.display = 'block';
+    document.querySelector('#modal-content-post').style.display = 'block';
+  });
+  const btnPost = divHome.querySelector('#btn-post');
+  btnPost.addEventListener('click', () => {
+    const describe = document.querySelector('#input-post').value;
+    post(describe);
+    document.querySelector('#modal-background-post').style.display = 'none';
+    document.querySelector('#modal-content-post').style.display = 'none';
+    // document.getElementById('div-post').appendChild(getPost());
 
+  });
+  console.log("Prueba consola");
+  getPosts().onSnapshot((response) => {
+    response.forEach((doc) => {
+      
+      console.log(doc.data());
     });
 
-    
-    // getPost()
-    // const divPost = document.querySelector('#div-post');
-  
-    
-    
-    // const btnMostrar = 
-    // const querySnapshot = await getPost();
-    //   querySnapshot.forEach(doc => {
-        
-    
-    //     });
-    // document.addEventListener('DOMContentLoaded', (event) => {
-    //   console.log('DOM fully loaded and parsed');
-    // });
 
-    //  window.addEventListener('DOMContentLoaded', e => {
-    //    console.log(e + "Laboratorians");
-      
-      //  });
+    //  getPost().then((querySnapshot) => {
+    //   querySnapshot.forEach((doc) => {
+
+    //     console.log(doc.data());
+    //   });
+    // });
+  });
+
+
+
+  // const divPost = 
+
+
+
+  // const btnMostrar = 
+  // const querySnapshot = await getPost();
+  //   querySnapshot.forEach(doc => {
+
+
+  //     });
+  // document.addEventListener('DOMContentLoaded', (event) => {
+  //   console.log('DOM fully loaded and parsed');
+  // });
+
+  //  window.addEventListener('DOMContentLoaded', e => {
+  //    console.log(e + "Laboratorians");
+
+  //  });
 
   const btnSignOut = divHome.querySelector('#btn-signout');
   btnSignOut.addEventListener('click', () => {

@@ -60,22 +60,18 @@ export const post = (describe) => {
     description: describe,
   })
     .then((docRef) => {
-      console.log('id del post creador', docRef.id);
+      console.log('id del post creado', docRef.id);
     })
     .catch((error) => {
       console.error('id errado', error);
     });
 };
 
- export const getPost = () => {
-   firebase.firestore().collection('posts').get().then((querySnapshot) => {
-     querySnapshot.forEach((doc) => {
-       console.log(doc.data());
-     })
-   }
-   )};
- 
+export const getPosts = () => firebase.firestore().collection('posts');
 
-//  export const getPost = () => firebase.firestore().collection('posts').get();
- 
- 
+// export const onGetPost = () => firebase.firestore().collection('posts').onSnapshot();
+
+//  db.collection("cities").doc("SF")
+//  .onSnapshot((doc) => {
+//      console.log("Current data: ", doc.data());
+//  });
