@@ -40,7 +40,8 @@ export const home = () => {
   const btnPost = divHome.querySelector('#btn-post');
   btnPost.addEventListener('click', async () => {
     const describe = document.querySelector('#input-post').value;
-    document.querySelector('#input-post').value = '';
+    if (describe !== '') {
+      document.querySelector('#input-post').value = '';
     if (!editStatus) {
       await post(describe);
     } else {
@@ -52,6 +53,10 @@ export const home = () => {
     document.querySelector('#btn-post').innerText = 'PUBLICAR';
     document.querySelector('#modal-background-post').style.display = 'none';
     document.querySelector('#modal-content-post').style.display = 'none';
+    } else {
+      alert('Escribe algo para publicar');
+    }
+    
   });
   
   getPosts().onSnapshot((response) => {
