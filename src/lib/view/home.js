@@ -21,7 +21,7 @@ export const home = () => {
         <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
         <button type='button' id='btn-post'>PUBLICAR</button>
       </div>
-  
+      
     </div>
     <div id='div-post'>
   </div>
