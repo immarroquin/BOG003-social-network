@@ -69,6 +69,8 @@ export const post = (describe) => {
 
 export const getPosts = () => firebase.firestore().collection('posts');
 
+export const deletePost= (idPost) => firebase.firestore().collection('posts').doc(idPost).delete();
+
 // export const onGetPost = () => firebase.firestore().collection('posts').onSnapshot();
 
 //  db.collection("cities").doc("SF")

@@ -2,7 +2,7 @@ import {
   signOut,
   post,
   getPosts,
-  //onGetPost,
+  deletePost,
 } from '../index.js';
 // eslint-disable-next-line
 import { defaultApp } from '../configfirebase';
@@ -10,22 +10,22 @@ import { defaultApp } from '../configfirebase';
 export const home = () => {
   const divHome = document.createElement('div');
   const viewHome = `
-    <h1>Bienvenidos a Laboratorians </h1>
-<div id='container-posts'>
-  <div id='container-btn-input'>
-   <button type='button' id='btn-input-modal'>Cuentanos tu experiencia laboratorians</button>
+  </html>
+  <h1>Bienvenidos a Laboratorians </h1>
+  <div id='container-posts'>
+    <div id='container-btn-input'>
+      <button type='button' id='btn-input-modal'>Cuentanos tu experiencia laboratorians</button>
+    </div>
+    <div id='modal-background-post'>
+      <div id='modal-content-post'>
+        <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
+        <button type='button' id='btn-post'>PUBLICAR</button>
+      </div>
+      
+    </div>
+    <div id='div-post'>
   </div>
-   <div id='modal-background-post'>
-     <div id='modal-content-post'>
-           <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
-          <button type='button' id='btn-post'>PUBLICAR</button>
-     </div>
-    
-  </div>
-  <div id='div-post'></div>
-</div>
-<button type='button' id='btn-Mostrar'>Mostrar post</button>
-<button type='button' id='btn-signout'>Cerrar Sesion</button>
+  <button type='button' id='btn-signout'>Cerrar Sesion</button>
 `;
   divHome.innerHTML = viewHome;
   const btnInputModal = divHome.querySelector('#btn-input-modal');
@@ -42,13 +42,27 @@ export const home = () => {
     // document.getElementById('div-post').appendChild(getPost());
 
   });
-  console.log("Prueba consola");
+  
   getPosts().onSnapshot((response) => {
+    const divPosts= document.querySelector('#div-post');
+    const names = firebase.auth().currentUser.displayName;
+    divPosts.innerHTML = '';
     response.forEach((doc) => {
-      
       console.log(doc.data());
-    });
+      divPosts.innerHTML += `
+      <div class= "card-post">
+      <p>${names}</p>
+      <p>${doc.data().description}</p>
+      <button type='button' class='btn-delete' data-id='${doc.id}'>Eliminar</button></div>
+      </div>`
+      const btnDelete = document.querySelectorAll('.btn-delete');
+btnDelete.forEach(btn =>{
+  btn.addEventListener('click', async (e) =>{
+    await deletePost(e.target.dataset.id);
+  })
+})
 
+    });
 
     //  getPost().then((querySnapshot) => {
     //   querySnapshot.forEach((doc) => {
