@@ -1,10 +1,11 @@
 import {
   signOut,
   post,
-  getPost,
+  getPosts,
+  //onGetPost,
 } from '../index.js';
 // eslint-disable-next-line
-import {defaultApp} from '../configfirebase.js';
+import { defaultApp } from '../configfirebase.js';
 
 export const home = () => {
   const divHome = document.createElement('div');
@@ -19,30 +20,66 @@ export const home = () => {
            <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
           <button type='button' id='btn-post'>PUBLICAR</button>
      </div>
-     
+    
   </div>
   <div id='div-post'></div>
 </div>
+<button type='button' id='btn-Mostrar'>Mostrar post</button>
 <button type='button' id='btn-signout'>Cerrar Sesion</button>
 `;
   divHome.innerHTML = viewHome;
   const btnInputModal = divHome.querySelector('#btn-input-modal');
-  btnInputModal.addEventListener('click', () => { 
-      document.querySelector('#modal-background-post').style.display = 'block';
-      document.querySelector('#modal-content-post').style.display = 'block';
-   });
-   const btnPost = divHome.querySelector('#btn-post');
-      btnPost.addEventListener('click', () => { 
-        const describe = document.querySelector('#input-post').value;
-        post(describe);
-        document.querySelector('#modal-background-post').style.display = 'none';
-        document.querySelector('#modal-content-post').style.display = 'none';
-        
-           });
-           getPost();  
-          
-           
-         const btnSignOut = divHome.querySelector('#btn-signout');
+  btnInputModal.addEventListener('click', () => {
+    document.querySelector('#modal-background-post').style.display = 'block';
+    document.querySelector('#modal-content-post').style.display = 'block';
+  });
+  const btnPost = divHome.querySelector('#btn-post');
+  btnPost.addEventListener('click', () => {
+    const describe = document.querySelector('#input-post').value;
+    post(describe);
+    document.querySelector('#modal-background-post').style.display = 'none';
+    document.querySelector('#modal-content-post').style.display = 'none';
+    // document.getElementById('div-post').appendChild(getPost());
+
+  });
+  console.log("Prueba consola");
+  getPosts().onSnapshot((response) => {
+    response.forEach((doc) => {
+      
+      console.log(doc.data());
+    });
+
+
+    //  getPost().then((querySnapshot) => {
+    //   querySnapshot.forEach((doc) => {
+
+    //     console.log(doc.data());
+    //   });
+    // });
+  });
+
+
+
+  // const divPost = 
+
+
+
+  // const btnMostrar = 
+  // const querySnapshot = await getPost();
+  //   querySnapshot.forEach(doc => {
+
+
+  //     });
+  // document.addEventListener('DOMContentLoaded', (event) => {
+  //   console.log('DOM fully loaded and parsed');
+  // });
+
+  //  window.addEventListener('DOMContentLoaded', e => {
+  //    console.log(e + "Laboratorians");
+
+  //  });
+
+  const btnSignOut = divHome.querySelector('#btn-signout');
   btnSignOut.addEventListener('click', () => {
     signOut();
   });
