@@ -71,9 +71,8 @@ export const getPosts = () => firebase.firestore().collection('posts');
 
 export const deletePost= (idPost) => firebase.firestore().collection('posts').doc(idPost).delete();
 
-// export const onGetPost = () => firebase.firestore().collection('posts').onSnapshot();
+export const getPost= (id) => firebase.firestore().collection('posts').doc(id).get();
 
-//  db.collection("cities").doc("SF")
-//  .onSnapshot((doc) => {
-//      console.log("Current data: ", doc.data());
-//  });
+export const updatePost= (id, updatePost) => firebase.firestore().collection('posts').doc(id).update(updatePost);
+
+
