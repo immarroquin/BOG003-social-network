@@ -5,7 +5,7 @@ import {
   //onGetPost,
 } from '../index.js';
 // eslint-disable-next-line
-import { defaultApp } from '../configfirebase.js';
+import { defaultApp } from '../configfirebase';
 
 export const home = () => {
   const divHome = document.createElement('div');
