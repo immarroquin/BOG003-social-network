@@ -31,7 +31,6 @@ export const home = () => {
   let editStatus = false;
   let id = '';
   divHome.innerHTML = viewHome;
-  const postForm= document.querySelector('#post-form'); 
   const btnInputModal = divHome.querySelector('#btn-input-modal');
   btnInputModal.addEventListener('click', () => {
     document.querySelector('#modal-background-post').style.display = 'block';
@@ -40,7 +39,8 @@ export const home = () => {
   
   const btnPost = divHome.querySelector('#btn-post');
   btnPost.addEventListener('click', async () => {
-    let describe = document.querySelector('#input-post').value;
+    const describe = document.querySelector('#input-post').value;
+    document.querySelector('#input-post').value = '';
     if (!editStatus) {
       await post(describe);
     } else {
@@ -48,44 +48,50 @@ export const home = () => {
       description: describe,
      })
     }
+    editStatus = false;
+    document.querySelector('#btn-post').innerText = 'PUBLICAR';
     document.querySelector('#modal-background-post').style.display = 'none';
     document.querySelector('#modal-content-post').style.display = 'none';
   });
   
   getPosts().onSnapshot((response) => {
-    const divPosts= document.querySelector('#div-post'); 
-    const names = firebase.auth().currentUser.displayName;
-    divPosts.innerHTML = '';
-    response.forEach((doc) => {
-      console.log(doc.data());
-      divPosts.innerHTML += `
-      <div class= "card-post">
-      <p>${doc.data().names}</p>
-      <p>${doc.data().description}</p>
-      <button type='button' class='btn-delete' data-id='${doc.id}'>Eliminar</button></div>
-      <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button></div>
-      </div>`
-      const btnDelete = document.querySelectorAll('.btn-delete');
-btnDelete.forEach(btn =>{
-  btn.addEventListener('click', async (e) =>{
-    await deletePost(e.target.dataset.id);
-  });
-});
-
-const btnEdit = document.querySelectorAll('.btn-edit');
-btnEdit.forEach(btn =>{
-  btn.addEventListener('click', async (e) =>{
-   const editDoc = await getPost(e.target.dataset.id);
-    console.log(editDoc.data());
-    editStatus = true;
-    id = doc.id;
-    document.querySelector('#input-post').value = editDoc.data().description;
-    document.querySelector('#btn-post').innerText = 'Guardar';
-    document.querySelector('#modal-background-post').style.display = 'block';
-    document.querySelector('#modal-content-post').style.display = 'block';
-  });
-});
+       const divPosts= document.querySelector('#div-post'); 
+       const names = firebase.auth().currentUser.displayName;
+        divPosts.innerHTML = '';
+        response.forEach((doc) => {
+          console.log(doc.data());
+          divPosts.innerHTML += `
+          <div class= "card-post">
+          <p>${names}</p>
+          <p>${doc.data().description}</p>
+          <button type='button' class='btn-delete' data-id='${doc.id}'>Eliminar</button></div>
+          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button></div>
+          </div>`
+          const btnDelete = document.querySelectorAll('.btn-delete');
+    btnDelete.forEach(btn =>{
+      btn.addEventListener('click', async (e) =>{
+        await deletePost(e.target.dataset.id);
+      });
     });
+    
+    const btnEdit = document.querySelectorAll('.btn-edit');
+    //document.querySelector('#input-post').value = '';
+    btnEdit.forEach(btn =>{
+      btn.addEventListener('click', async (e) =>{
+       const editDoc = await getPost(e.target.dataset.id);
+        console.log(editDoc.data());
+        editStatus = true;
+        id = editDoc.id;
+        document.querySelector('#input-post').value = editDoc.data().description;
+        document.querySelector('#btn-post').innerText = 'GUARDAR';
+        document.querySelector('#modal-background-post').style.display = 'block';
+        document.querySelector('#modal-content-post').style.display = 'block';
+        
+      });
+    });
+        });
+    
+    
   });
 
   const btnSignOut = divHome.querySelector('#btn-signout');
