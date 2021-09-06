@@ -40,13 +40,19 @@ export const home = () => {
   const btnPost = divHome.querySelector('#btn-post');
   btnPost.addEventListener('click', async () => {
     const describe = document.querySelector('#input-post').value;
+    const nameuid = firebase.auth().currentUser.displayName;
+    const uid = firebase.auth().currentUser.uid;
+    // const date = new Date().getTime();
     if (describe !== '') {
       document.querySelector('#input-post').value = '';
     if (!editStatus) {
-      await post(describe);
+      await post(describe, nameuid, uid);
     } else {
      await updatePost(id, {
       description: describe,
+      nameUser: nameuid,
+      uidUser: uid,
+      
      })
     }
     editStatus = false;
@@ -56,21 +62,21 @@ export const home = () => {
     } else {
       alert('Escribe algo para publicar');
     }
-    
   });
   
   getPosts().onSnapshot((response) => {
+      const uid = firebase.auth().currentUser.uid;
        const divPosts= document.querySelector('#div-post'); 
-       const names = firebase.auth().currentUser.displayName;
         divPosts.innerHTML = '';
         response.forEach((doc) => {
-          console.log(doc.data());
           divPosts.innerHTML += `
           <div class= "card-post">
-          <p>${names}</p>
-          <p>${doc.data().description}</p>
+          <p>${doc.data().nameUser}</p>
+          
+          ${uid === doc.data().uidUser ? `
           <button type='button' class='btn-delete' data-id='${doc.id}'>Eliminar</button></div>
-          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button></div>
+          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button></div>` : ''}
+          <p>${doc.data().description}</p>
           </div>`
           const btnDelete = document.querySelectorAll('.btn-delete');
     btnDelete.forEach(btn =>{

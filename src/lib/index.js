@@ -52,12 +52,13 @@ export const loginGoogle = () => {
 };
 
 // Comienzo de Firestore
-
-
-export const post = (describe) => {
+export const post = (describe, nameuid, uid) => {
   const db = firebase.firestore();
   db.collection('posts').add({
     description: describe,
+    nameUser: nameuid,
+    uidUser: uid,
+
   })
     .then((docRef) => {
       console.log('id del post creado', docRef.id);
