@@ -113,6 +113,7 @@ export const home = () => {
         btn.addEventListener('click' , async (e) =>{
           const likeDoc = await getPost(e.target.dataset.id);
           const likeUser = likeDoc.data().likes;
+          console.log(likeUser);
           if(likeUser.includes(uid)){
           dislike(uid , e.target.dataset.id);
           } else{
