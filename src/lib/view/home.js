@@ -24,10 +24,10 @@ export const home = () => {
     <div id='modal-background-post'>
       <div id='modal-content-post'>
         <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
-        <button type='button' id='btn-post'>PUBLICAR</button>
+        <button disabled type='button' id='btn-post'>PUBLICAR</button>
       </div>  
     </div>
-    <div id='div-post'>
+    <div id='div-post'></div>
   </div>
   <button type='button' id='btn-signout'>Cerrar Sesion</button>
 `;
@@ -38,6 +38,16 @@ export const home = () => {
   btnInputModal.addEventListener('click', () => {
     document.querySelector('#modal-background-post').style.display = 'block';
     document.querySelector('#modal-content-post').style.display = 'block';
+  });
+
+  const inputPost = divHome.querySelector('#input-post');
+  inputPost.addEventListener('keyup', () => {
+    const valueInput = inputPost.value;
+    if (valueInput == '') {
+      document.querySelector('#btn-post').disabled = true;
+    } else {
+      document.querySelector('#btn-post').disabled = false;
+    }
   });
 
   const btnPost = divHome.querySelector('#btn-post');
@@ -64,8 +74,6 @@ export const home = () => {
       document.querySelector('#btn-post').innerText = 'PUBLICAR';
       document.querySelector('#modal-background-post').style.display = 'none';
       document.querySelector('#modal-content-post').style.display = 'none';
-    } else {
-      alert('Escribe algo para publicar');
     }
   });
 
