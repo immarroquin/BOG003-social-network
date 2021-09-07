@@ -84,4 +84,3 @@ likes: firebase.firestore.FieldValue.arrayUnion(uid),
 export const dislike = (uid , idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
   likes: firebase.firestore.FieldValue.arrayRemove(uid),
   }));
-
