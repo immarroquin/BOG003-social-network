@@ -5,10 +5,13 @@ import {
   deletePost,
   getPost,
   updatePost,
+  like,
+  dislike,
 } from '../index.js';
 // eslint-disable-next-line
-import { defaultApp } from '../configfirebase.js';
-
+import {
+  defaultApp
+} from '../configfirebase.js';
 export const home = () => {
   const divHome = document.createElement('div');
   const viewHome = `
@@ -36,46 +39,57 @@ export const home = () => {
     document.querySelector('#modal-background-post').style.display = 'block';
     document.querySelector('#modal-content-post').style.display = 'block';
   });
-  
+
   const btnPost = divHome.querySelector('#btn-post');
   btnPost.addEventListener('click', async () => {
     const describe = document.querySelector('#input-post').value;
+    const nameuid = firebase.auth().currentUser.displayName;
+    const uid = firebase.auth().currentUser.uid;
+    const getdate = new Date();
+    const date = getdate.getDate() + '/' + (getdate.getMonth()+1) + '/' + getdate.getFullYear();
+    console.log(date);
     if (describe !== '') {
       document.querySelector('#input-post').value = '';
-    if (!editStatus) {
-      await post(describe);
-    } else {
-     await updatePost(id, {
-      description: describe,
-     })
-    }
-    editStatus = false;
-    document.querySelector('#btn-post').innerText = 'PUBLICAR';
-    document.querySelector('#modal-background-post').style.display = 'none';
-    document.querySelector('#modal-content-post').style.display = 'none';
+      if (!editStatus) {
+        await post(describe, nameuid, uid, date);
+      } else {
+        await updatePost(id, {
+          description: describe,
+          nameUser: nameuid,
+          uidUser: uid,
+          currentDate : date,
+        })
+      }
+      editStatus = false;
+      document.querySelector('#btn-post').innerText = 'PUBLICAR';
+      document.querySelector('#modal-background-post').style.display = 'none';
+      document.querySelector('#modal-content-post').style.display = 'none';
     } else {
       alert('Escribe algo para publicar');
     }
-    
   });
-  
+
   getPosts().onSnapshot((response) => {
-       const divPosts= document.querySelector('#div-post'); 
-       const names = firebase.auth().currentUser.displayName;
-        divPosts.innerHTML = '';
-        response.forEach((doc) => {
-          console.log(doc.data());
-          divPosts.innerHTML += `
+    const uid = firebase.auth().currentUser.uid;
+    const divPosts = document.querySelector('#div-post');
+    divPosts.innerHTML = '';
+    response.forEach((doc) => {
+      divPosts.innerHTML += `
           <div class= "card-post">
-          <p>${names}</p>
-          <p>${doc.data().description}</p>
+          <p>${doc.data().nameUser}</p>
+          <p>${doc.data().currentDate}</p>
+          ${uid === doc.data().uidUser ? `
           <button type='button' class='btn-delete' data-id='${doc.id}'>Eliminar</button></div>
-          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button></div>
-          </div>`
-          const btnDelete = document.querySelectorAll('.btn-delete');
-    btnDelete.forEach(btn =>{
-      btn.addEventListener('click', async (e) =>{
-        await deletePost(e.target.dataset.id);
+          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button></div>` : ''}
+          <p>${doc.data().description}</p>
+          ${doc.data().likes.includes(uid) ? `
+         <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></`: ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>` }
+          </div>`;
+      const btnDelete = document.querySelectorAll('.btn-delete');
+      btnDelete.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          await deletePost(e.target.dataset.id);
+        });
       });
 
       const btnEdit = document.querySelectorAll('.btn-edit');
@@ -93,7 +107,8 @@ export const home = () => {
 
         });
       });
-      const btnLike = document.querySelector('.img-like');
+      
+      const btnLike = document.querySelectorAll('.img-like');
       btnLike.forEach( btn =>{
         btn.addEventListener('click' , async (e) =>{
           const likeDoc = await getPost(e.target.dataset.id);
@@ -107,10 +122,9 @@ export const home = () => {
         });
       });
     });
-        });
-    
     
   });
+
 
   const btnSignOut = divHome.querySelector('#btn-signout');
   btnSignOut.addEventListener('click', () => {
