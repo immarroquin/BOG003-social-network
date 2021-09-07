@@ -27,7 +27,8 @@ export const home = () => {
         <button type='button' id='btn-post'>PUBLICAR</button>
       </div>  
     </div>
-    <div id='div-post'>
+    <div id='div-post'></div> 
+    <div id='modal-inpuit-void'><span>X<span></div>
   </div>
   <button type='button' id='btn-signout'>Cerrar Sesion</button>
 `;
@@ -65,7 +66,9 @@ export const home = () => {
       document.querySelector('#modal-background-post').style.display = 'none';
       document.querySelector('#modal-content-post').style.display = 'none';
     } else {
-      alert('Escribe algo para publicar');
+     
+      document.querySelector('#modal-inpuit-void').style.display = 'block'
+      
     }
   });
 
