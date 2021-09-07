@@ -226,3 +226,12 @@ align-items: center;
 .card-post{
   border: 2px solid rgb(0, 255, 170);
 }
+.btn-like{
+  width: 80px;
+  border: none;
+  background-color: transparent;
+}
+.img-like{
+  width: 30px;
+}
+

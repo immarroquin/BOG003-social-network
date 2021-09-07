@@ -52,12 +52,14 @@ export const loginGoogle = () => {
 };
 
 // Comienzo de Firestore
-
-
-export const post = (describe) => {
+export const post = (describe, nameuid, uid, date) => {
   const db = firebase.firestore();
   db.collection('posts').add({
     description: describe,
+    nameUser: nameuid,
+    uidUser: uid,
+    currentDate : date,
+    likes : [],
   })
     .then((docRef) => {
       console.log('id del post creado', docRef.id);
@@ -75,4 +77,11 @@ export const getPost= (id) => firebase.firestore().collection('posts').doc(id).g
 
 export const updatePost= (id, updatePost) => firebase.firestore().collection('posts').doc(id).update(updatePost);
 
+export const like = (uid , idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
+likes: firebase.firestore.FieldValue.arrayUnion(uid),
+}));
+
+export const dislike = (uid , idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
+  likes: firebase.firestore.FieldValue.arrayRemove(uid),
+  }));
 
