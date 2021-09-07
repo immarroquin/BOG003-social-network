@@ -241,6 +241,8 @@ align-items: center;
 .container-modal-delete{
   border: 2px solid yellow;
   display: none;
+  width: 100px;
+  height: 100px;
 }
 .modal-content-delete {
   border: 2px solid green;

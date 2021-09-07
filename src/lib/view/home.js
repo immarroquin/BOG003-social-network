@@ -28,13 +28,7 @@ export const home = () => {
     </div>
   </div>
   <div id='div-post'></div>
-  <div class='container-modal-delete'>
-    <div class='modal-content-delete'>
-      <img src='img/exit.png' class='btn-exit'>
-      <p>¿Deseas eliminar este post?</p>
-      <button class='btn-accept-delete'>ACEPTAR</button>
-    </div>
-  </div>
+  
 </div>
 <button type='button' id='btn-signout'>Cerrar Sesion</button>
 `;
@@ -98,8 +92,15 @@ export const home = () => {
           <div id='container-selects'>
             <button type='button' class='btn-edit' data-id='${doc.id}'>
               <img src='img/edit.png' class='img-selects'>Editar</button>
-            <button type='button' class='btn-delete' data-id='${doc.id}'>
-              <img src='img/delete.png' class='img-selects'>Eliminar</button>` : ''}
+            <button type='button' class='btn-delete'>
+              <img src='img/delete.png' class='img-selects'>Eliminar</button> 
+              <div class='container-modal-delete'>
+              <div class='modal-content-delete'>
+                <img src='img/exit.png' class='btn-exit'>
+                <p>¿Deseas eliminar este post?</p>
+                <button class='btn-accept-delete' data-id='${doc.id}'>ACEPTAR</button>
+              </div>
+            </div>` : ''}
           </div>
           <p>${doc.data().description}</p>
           ${doc.data().likes.includes(uid) ? `
@@ -121,6 +122,13 @@ export const home = () => {
         });
       });
 
+      
+      // window.addEventListener('click', () => {
+      //   document.querySelector('#container-selects').style.display = 'none';
+      //    document.querySelector('.container-modal-delete').style.display = 'none';
+      //    document.querySelector('.modal-content-delete').style.display = 'none';
+      // }); 
+
       const btnEdit = document.querySelectorAll('.btn-edit');
       //document.querySelector('#input-post').value = '';
       btnEdit.forEach(btn => {
@@ -139,8 +147,8 @@ export const home = () => {
 
       const btnAccept = document.querySelectorAll('.btn-accept-delete');
       btnAccept.forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          await deletePost(e.target.dataset.id);
+        btn.addEventListener('click', (e) => {
+           deletePost(e.target.dataset.id);
         });
       });
 
