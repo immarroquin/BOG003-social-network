@@ -24,11 +24,10 @@ export const home = () => {
     <div id='modal-background-post'>
       <div id='modal-content-post'>
         <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
-        <button type='button' id='btn-post'>PUBLICAR</button>
+        <button disabled type='button' id='btn-post'>PUBLICAR</button>
       </div>  
     </div>
-    <div id='div-post'></div> 
-    <div id='modal-inpuit-void'><span>X<span></div>
+    <div id='div-post'></div>
   </div>
   <button type='button' id='btn-signout'>Cerrar Sesion</button>
 `;
@@ -39,6 +38,16 @@ export const home = () => {
   btnInputModal.addEventListener('click', () => {
     document.querySelector('#modal-background-post').style.display = 'block';
     document.querySelector('#modal-content-post').style.display = 'block';
+  });
+
+  const inputPost = divHome.querySelector('#input-post');
+  inputPost.addEventListener('keyup', () => {
+    const valueInput = inputPost.value;
+    if (valueInput == '') {
+      document.querySelector('#btn-post').disabled = true;
+    } else {
+      document.querySelector('#btn-post').disabled = false;
+    }
   });
 
   const btnPost = divHome.querySelector('#btn-post');
@@ -65,10 +74,6 @@ export const home = () => {
       document.querySelector('#btn-post').innerText = 'PUBLICAR';
       document.querySelector('#modal-background-post').style.display = 'none';
       document.querySelector('#modal-content-post').style.display = 'none';
-    } else {
-     
-      document.querySelector('#modal-inpuit-void').style.display = 'block'
-      
     }
   });
 
@@ -82,19 +87,33 @@ export const home = () => {
           <p>${doc.data().nameUser}</p>
           <p>${doc.data().currentDate}</p>
           ${uid === doc.data().uidUser ? `
-          <button type='button' class='btn-delete' data-id='${doc.id}'>Eliminar</button></div>
-          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button></div>` : ''}
+          <button type='button' class='btn-delete'>Eliminar</button>
+          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button>
+          </div>` : ''}
+          ${uid === doc.data().uidUser ? `
+          <button type='button' class='btn-delete'>Eliminar</button>
+          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button>
+          </div>` : ''}
           <p>${doc.data().description}</p>
           ${doc.data().likes.includes(uid) ? `
          <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></`: ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>` }
           </div>`;
-      const btnDelete = document.querySelectorAll('.btn-delete');
+
+          const btnDelete= document.querySelectorAll('.btn-delete');
       btnDelete.forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          await deletePost(e.target.dataset.id);
+        btn.addEventListener('click', () => {
+          document.querySelector('#container-modal-delete').style.display = 'block';
         });
       });
 
+      const btnAccept = document.querySelectorAll('.btn-accept-delete');
+      btnAccept.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          await deletePost(e.target.dataset.id);
+          console.log('hola');
+        });
+      });
+      
       const btnEdit = document.querySelectorAll('.btn-edit');
       //document.querySelector('#input-post').value = '';
       btnEdit.forEach(btn => {
