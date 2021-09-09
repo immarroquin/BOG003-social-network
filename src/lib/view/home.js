@@ -43,7 +43,7 @@ export const home = () => {
 
   const inputPost = divHome.querySelector('#input-post');
   inputPost.addEventListener('keyup', () => {
-    const valueInput = inputPost.value;
+    const valueInput = inputPost.value.trim();
     if (valueInput == '') {
       document.querySelector('#btn-post').disabled = true;
     } else {
