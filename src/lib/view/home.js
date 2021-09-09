@@ -18,15 +18,15 @@ export const home = () => {
   const viewHome = `
 </html>
 <header id='hder'>
-<img id='logo-hder' src="img/logolaborafdonegro.png" alt="logo">
+<img id='logo-hder' src='img/logolaborafdonegro.png' alt='logo'>
 <div class='container-images'>
-<img id='img-home' src="img/Home.png" alt="home">
-<img id='img-profile' src="img/profile.png" alt="profile">
+<img id='img-home' src='img/Home.png' alt='home'>
+<img id='img-profile' src='img/profile.png' alt='profile'>
 </div>
 </header>
 <main id='container-posts'>
   <div id='container-btn-input'>
-   <img id='img-input' src="img/profile.png" alt="profile">
+   <img id='img-input' src='img/profile.png' alt='profile'>
 <button type='button' id='btn-input-modal'>Cuentanos tu experiencia Laboratorians</button>
   </div>
   <div id='modal-background-post'>
@@ -39,6 +39,7 @@ export const home = () => {
   <button type='button' id='btn-signout'>Cerrar Sesion</button>
 </main>
 `;
+  let openSelect = false;
   let editStatus = false;
   let id = '';
   divHome.innerHTML = viewHome;
@@ -91,35 +92,51 @@ export const home = () => {
     divPosts.innerHTML = '';
     response.forEach((doc) => {
       divPosts.innerHTML += `
-          <div class= "card-post">
-          <p>${doc.data().nameUser}</p>
-          <p>${doc.data().currentDate}</p>
-          ${uid === doc.data().uidUser ? `
-          <img src='img/select.png' id='btn-select' data-id='${doc.id}'>
-          <div id='container-selects'>
-            <button type='button' class='btn-edit' data-id='${doc.id}'>
+ <div class= 'card-post'>
+    <div id='container-user-data'>
+     <img id='img-post' src='img/profile.png' alt='profile'>
+      <div id='container-data'>
+        <p id='user-name'>${doc.data().nameUser}</p>
+        <p id='date'>${doc.data().currentDate}</p>
+      </div>
+    </div>
+         <p id='description-post'>${doc.data().description}</p>
+       <div id='container-likes'>
+          ${doc.data().likes.includes(uid) ? `
+         <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></` : ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>`} 
+       </div>
+         <div class='container-options'>
+             ${uid === doc.data().uidUser ? `
+               <img src='img/select.png' id='btn-select' data-id='${doc.id}'>
+           <div id='container-selects'>
+              <button type='button' class='btn-edit' data-id='${doc.id}'>
               <img src='img/edit.png' class='img-selects'>Editar</button>
-            <button type='button' class='btn-delete'>
+              <button type='button' class='btn-delete'>
               <img src='img/delete.png' class='img-selects'>Eliminar</button> 
               <div class='container-modal-delete'>
-              <div class='modal-content-delete'>
-                <img src='img/exit.png' class='btn-exit'>
-                <p>¿Deseas eliminar este post?</p>
-                <button class='btn-accept-delete' data-id='${doc.id}'>ACEPTAR</button>
+                 <div class='modal-content-delete'>
+                   <img src='img/exit.png' class='btn-exit'>
+                   <p>¿Deseas eliminar este post?</p>
+                   <button class='btn-accept-delete' data-id='${doc.id}'>ACEPTAR</button>
+                 </div>
               </div>
-            </div>` : ''}
-          </div>
-          <p>${doc.data().description}</p>
-          ${doc.data().likes.includes(uid) ? `
-         <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></` : ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>`}
-          </div>`;
+            </div>` : ''}  
+          </div>        
+  </div>`;
 
       const btnSelect = document.querySelectorAll('#btn-select');
       btnSelect.forEach(btn => {
         btn.addEventListener('click', () => {
-          document.querySelector('#container-selects').style.display = 'block';
+          if (openSelect === false) {
+            document.querySelector('#container-selects').style.display = 'block'; 
+            openSelect = true;           
+          }else{
+            document.querySelector('#container-selects').style.display = 'none';
+            openSelect = false;
+          }
         });
       });
+
 
       const btnDelete = document.querySelectorAll('.btn-delete'); 
       btnDelete.forEach(btn => {
@@ -128,14 +145,17 @@ export const home = () => {
           document.querySelector('.modal-content-delete').style.display = 'block';
         });
       });
-
-      
-      // window.addEventListener('click', () => {
-      //   document.querySelector('#container-selects').style.display = 'none';
-      //    document.querySelector('.container-modal-delete').style.display = 'none';
-      //    document.querySelector('.modal-content-delete').style.display = 'none';
-      // }); 
-
+    
+      /*const divContainerPost = document.querySelectorAll('.card-post');
+      divContainerPost.forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log(openSelect);
+      if (openSelect === true) {
+        document.querySelector('#container-selects').style.display = 'none';
+            openSelect = false;
+      }
+       }); 
+    });*/
       const btnEdit = document.querySelectorAll('.btn-edit');
       //document.querySelector('#input-post').value = '';
       btnEdit.forEach(btn => {
