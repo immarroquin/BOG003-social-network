@@ -15,21 +15,22 @@ import {
 export const home = () => {
   const divHome = document.createElement('div');
   const viewHome = `
-  </html>
-  <h1>Bienvenidos a Laboratorians </h1>
-  <div id='container-posts'>
-    <div id='container-btn-input'>
-      <button type='button' id='btn-input-modal'>Cuentanos tu experiencia laboratorians</button>
-    </div>
-    <div id='modal-background-post'>
-      <div id='modal-content-post'>
-        <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
-        <button disabled type='button' id='btn-post'>PUBLICAR</button>
-      </div>  
-    </div>
-    <div id='div-post'></div>
+</html>
+<h1>Bienvenidos a Laboratorians </h1>
+<div id='container-posts'>
+  <div id='container-btn-input'>
+    <button type='button' id='btn-input-modal'>Cuentanos tu experiencia laboratorians</button>
   </div>
-  <button type='button' id='btn-signout'>Cerrar Sesion</button>
+  <div id='modal-background-post'>
+    <div id='modal-content-post'>
+      <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
+      <button disabled type='button' id='btn-post'>PUBLICAR</button>
+    </div>
+  </div>
+  <div id='div-post'></div>
+  
+</div>
+<button type='button' id='btn-signout'>Cerrar Sesion</button>
 `;
   let editStatus = false;
   let id = '';
@@ -42,7 +43,7 @@ export const home = () => {
 
   const inputPost = divHome.querySelector('#input-post');
   inputPost.addEventListener('keyup', () => {
-    const valueInput = inputPost.value;
+    const valueInput = inputPost.value.trim();
     if (valueInput == '') {
       document.querySelector('#btn-post').disabled = true;
     } else {
@@ -56,7 +57,7 @@ export const home = () => {
     const nameuid = firebase.auth().currentUser.displayName;
     const uid = firebase.auth().currentUser.uid;
     const getdate = new Date();
-    const date = getdate.getDate() + '/' + (getdate.getMonth()+1) + '/' + getdate.getFullYear();
+    const date = getdate.getDate() + '/' + (getdate.getMonth() + 1) + '/' + getdate.getFullYear();
     console.log(date);
     if (describe !== '') {
       document.querySelector('#input-post').value = '';
@@ -67,7 +68,7 @@ export const home = () => {
           description: describe,
           nameUser: nameuid,
           uidUser: uid,
-          currentDate : date,
+          currentDate: date,
         })
       }
       editStatus = false;
@@ -87,33 +88,47 @@ export const home = () => {
           <p>${doc.data().nameUser}</p>
           <p>${doc.data().currentDate}</p>
           ${uid === doc.data().uidUser ? `
-          <button type='button' class='btn-delete'>Eliminar</button>
-          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button>
-          </div>` : ''}
-          ${uid === doc.data().uidUser ? `
-          <button type='button' class='btn-delete'>Eliminar</button>
-          <button type='button' class='btn-edit' data-id='${doc.id}'>Editar</button>
-          </div>` : ''}
+          <img src='img/select.png' id='btn-select' data-id='${doc.id}'>
+          <div id='container-selects'>
+            <button type='button' class='btn-edit' data-id='${doc.id}'>
+              <img src='img/edit.png' class='img-selects'>Editar</button>
+            <button type='button' class='btn-delete'>
+              <img src='img/delete.png' class='img-selects'>Eliminar</button> 
+              <div class='container-modal-delete'>
+              <div class='modal-content-delete'>
+                <img src='img/exit.png' class='btn-exit'>
+                <p>¿Deseas eliminar este post?</p>
+                <button class='btn-accept-delete' data-id='${doc.id}'>ACEPTAR</button>
+              </div>
+            </div>` : ''}
+          </div>
           <p>${doc.data().description}</p>
           ${doc.data().likes.includes(uid) ? `
-         <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></`: ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>` }
+         <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></` : ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>`}
           </div>`;
 
-          const btnDelete= document.querySelectorAll('.btn-delete');
-      btnDelete.forEach(btn => {
+      const btnSelect = document.querySelectorAll('#btn-select');
+      btnSelect.forEach(btn => {
         btn.addEventListener('click', () => {
-          document.querySelector('#container-modal-delete').style.display = 'block';
+          document.querySelector('#container-selects').style.display = 'block';
         });
       });
 
-      const btnAccept = document.querySelectorAll('.btn-accept-delete');
-      btnAccept.forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          await deletePost(e.target.dataset.id);
-          console.log('hola');
+      const btnDelete = document.querySelectorAll('.btn-delete'); 
+      btnDelete.forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelector('.container-modal-delete').style.display = 'block';
+          document.querySelector('.modal-content-delete').style.display = 'block';
         });
       });
+
       
+      // window.addEventListener('click', () => {
+      //   document.querySelector('#container-selects').style.display = 'none';
+      //    document.querySelector('.container-modal-delete').style.display = 'none';
+      //    document.querySelector('.modal-content-delete').style.display = 'none';
+      // }); 
+
       const btnEdit = document.querySelectorAll('.btn-edit');
       //document.querySelector('#input-post').value = '';
       btnEdit.forEach(btn => {
@@ -129,22 +144,36 @@ export const home = () => {
 
         });
       });
-      
+
+      const btnAccept = document.querySelectorAll('.btn-accept-delete');
+      btnAccept.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+           deletePost(e.target.dataset.id);
+        });
+      });
+
+      const btnExit = document.querySelectorAll('.btn-exit');
+      btnExit.forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.container-modal-delete').style.display = 'none';
+        document.querySelector('.modal-content-delete').style.display = 'none';
+      });
+    }); 
       const btnLike = document.querySelectorAll('.img-like');
-      btnLike.forEach( btn =>{
-        btn.addEventListener('click' , async (e) =>{
+      btnLike.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
           const likeDoc = await getPost(e.target.dataset.id);
           const likeUser = likeDoc.data().likes;
           console.log(likeUser);
-          if(likeUser.includes(uid)){
-          dislike(uid , e.target.dataset.id);
-          } else{
-          like(uid, e.target.dataset.id);
+          if (likeUser.includes(uid)) {
+            dislike(uid, e.target.dataset.id);
+          } else {
+            like(uid, e.target.dataset.id);
           }
         });
       });
     });
-    
+
   });
 
 

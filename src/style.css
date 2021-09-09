@@ -226,17 +226,29 @@ align-items: center;
 .card-post{
   border: 2px solid rgb(0, 255, 170);
 }
-.btn-like{
-  width: 80px;
-  border: none;
-  background-color: transparent;
-}
 .img-like{
   width: 30px;
 }
-#btn-post{
-  background-color: pink;
+#btn-select{
+  width: 30px;
 }
+#container-selects {
+  display: none;
+}
+.img-selects {
+  width: 30px;
+}
+.container-modal-delete{
+  border: 2px solid yellow;
+  display: none;
+  width: 100px;
+  height: 100px;
+}
+.modal-content-delete {
+  border: 2px solid green;
+  display: none;
+}
+
 
 .container-modal-delete{
   border: 2px solid rgb(255, 72, 0);
