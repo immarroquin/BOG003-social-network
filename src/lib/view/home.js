@@ -14,12 +14,20 @@ import {
 } from '../configfirebase.js';
 export const home = () => {
   const divHome = document.createElement('div');
+  divHome.setAttribute('id','div-home');
   const viewHome = `
 </html>
-<h1>Bienvenidos a Laboratorians </h1>
-<div id='container-posts'>
+<header id='hder'>
+<img id='logo-hder' src="img/logolaborafdonegro.png" alt="logo">
+<div class='container-images'>
+<img id='img-home' src="img/Home.png" alt="home">
+<img id='img-profile' src="img/profile.png" alt="profile">
+</div>
+</header>
+<main id='container-posts'>
   <div id='container-btn-input'>
-    <button type='button' id='btn-input-modal'>Cuentanos tu experiencia laboratorians</button>
+   <img id='img-input' src="img/profile.png" alt="profile">
+<button type='button' id='btn-input-modal'>Cuentanos tu experiencia Laboratorians</button>
   </div>
   <div id='modal-background-post'>
     <div id='modal-content-post'>
@@ -28,9 +36,8 @@ export const home = () => {
     </div>
   </div>
   <div id='div-post'></div>
-  
-</div>
-<button type='button' id='btn-signout'>Cerrar Sesion</button>
+  <button type='button' id='btn-signout'>Cerrar Sesion</button>
+</main>
 `;
   let editStatus = false;
   let id = '';
