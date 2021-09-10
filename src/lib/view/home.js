@@ -126,7 +126,7 @@ export const home = () => {
 
       const btnSelect = document.querySelectorAll('#btn-select');
       btnSelect.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
           if (openSelect === false) {
             document.querySelector('#container-selects').style.display = 'block'; 
             openSelect = true;           
@@ -140,7 +140,7 @@ export const home = () => {
 
       const btnDelete = document.querySelectorAll('.btn-delete'); 
       btnDelete.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
           document.querySelector('.container-modal-delete').style.display = 'block';
           document.querySelector('.modal-content-delete').style.display = 'block';
         });
