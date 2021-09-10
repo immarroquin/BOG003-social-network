@@ -17,6 +17,7 @@ export const home = () => {
   divHome.setAttribute('id','div-home');
   const viewHome = `
 </html>
+
 <header id='hder'>
 <img id='logo-hder' src='img/logolaborafdonegro.png' alt='logo'>
 <div class='container-images'>
@@ -27,19 +28,27 @@ export const home = () => {
 <main id='container-posts'>
   <div id='container-btn-input'>
    <img id='img-input' src='img/profile.png' alt='profile'>
-<button type='button' id='btn-input-modal'>Cuentanos tu experiencia Laboratorians</button>
+  <button type='button' id='btn-input-modal'>Cuentanos tu experiencia Laboratorians</button>
   </div>
-  <div id='modal-background-post'>
+   <div id='modal-background-post'>
     <div id='modal-content-post'>
-      <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
+    <div id='space-line'>
+      <p>Crear Publicación</p>
+      <img src='img/exit.png' class='btn-exit'>
+    </div>
+    <div id='line'></div>
+    <div id='after-line'>
+      <img id='img-modal-post' src='img/profile.png' alt='profile'>
+      <p>Aqui va el nombre del usuario</p>
+      <input type='text' id='input-post' >
       <button disabled type='button' id='btn-post'>PUBLICAR</button>
     </div>
+   </div>
   </div>
   <div id='div-post'></div>
   <button type='button' id='btn-signout'>Cerrar Sesion</button>
 </main>
 `;
-  let openSelect = false;
   let editStatus = false;
   let id = '';
   divHome.innerHTML = viewHome;
@@ -47,6 +56,8 @@ export const home = () => {
   btnInputModal.addEventListener('click', () => {
     document.querySelector('#modal-background-post').style.display = 'block';
     document.querySelector('#modal-content-post').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    document.querySelector('#input-post').focus();
   });
 
   const inputPost = divHome.querySelector('#input-post');
@@ -66,9 +77,10 @@ export const home = () => {
     const uid = firebase.auth().currentUser.uid;
     const getdate = new Date();
     const date = getdate.getDate() + '/' + (getdate.getMonth() + 1) + '/' + getdate.getFullYear();
-    console.log(date);
+    document.body.style.overflow = 'visible';
     if (describe !== '') {
       document.querySelector('#input-post').value = '';
+    
       if (!editStatus) {
         await post(describe, nameuid, uid, date);
       } else {
@@ -105,85 +117,72 @@ export const home = () => {
           ${doc.data().likes.includes(uid) ? `
          <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></` : ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>`} 
        </div>
-         <div class='container-options'>
              ${uid === doc.data().uidUser ? `
-               <img src='img/select.png' id='btn-select' data-id='${doc.id}'>
            <div id='container-selects'>
-              <button type='button' class='btn-edit' data-id='${doc.id}'>
-              <img src='img/edit.png' class='img-selects'>Editar</button>
-              <button type='button' class='btn-delete'>
-              <img src='img/delete.png' class='img-selects'>Eliminar</button> 
-              <div class='container-modal-delete'>
-                 <div class='modal-content-delete'>
-                   <img src='img/exit.png' class='btn-exit'>
-                   <p>¿Deseas eliminar este post?</p>
-                   <button class='btn-accept-delete' data-id='${doc.id}'>ACEPTAR</button>
-                 </div>
-              </div>
-            </div>` : ''}  
-          </div>        
-  </div>`;
+              <img src='img/edit.png' class='img-edit' data-id='${doc.id}'>
+              <img src='img/delete.png' class='img-delete' data-id='${doc.id}'>
+            </div>
+             <div class='modal-backgroud-delete'>
+            <div class='modal-content-delete'>
+               <img src='img/exit.png' class='btn-exit'>
+               <p>¿Deseas eliminar este post?</p>
+               <button class='btn-accept-delete' data-id='${doc.id}'>ACEPTAR</button>
+             </div>
+             </div>` : ''}
+  </div>
+                `;
 
-      const btnSelect = document.querySelectorAll('#btn-select');
-      btnSelect.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          if (openSelect === false) {
-            document.querySelector('#container-selects').style.display = 'block'; 
-            openSelect = true;           
-          }else{
-            document.querySelector('#container-selects').style.display = 'none';
-            openSelect = false;
-          }
-        });
-      });
+      // const btnSelect = document.querySelectorAll('#btn-select');
+      // btnSelect.forEach(btn => {
+      //   btn.addEventListener('click', () => {
+      //     if (openSelect === false) {
+      //       document.querySelector('#container-selects').style.display = 'block'; 
+      //       openSelect = true;
+      //     }else{
+      //       document.querySelector('#container-selects').style.display = 'none';
+      //       openSelect = false;
+      //     }
+      //   });
+      // });
 
 
-      const btnDelete = document.querySelectorAll('.btn-delete'); 
-      btnDelete.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          document.querySelector('.container-modal-delete').style.display = 'block';
+      const btnDelete = document.querySelectorAll('.img-delete'); 
+      btnDelete.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelector('.modal-backgroud-delete').style.display = 'block';
           document.querySelector('.modal-content-delete').style.display = 'block';
+         document.body.style.overflow = 'hidden';
         });
       });
-    
-      /*const divContainerPost = document.querySelectorAll('.card-post');
-      divContainerPost.forEach(btn => {
-      btn.addEventListener('click', () => {
-        console.log(openSelect);
-      if (openSelect === true) {
-        document.querySelector('#container-selects').style.display = 'none';
-            openSelect = false;
-      }
-       }); 
-    });*/
-      const btnEdit = document.querySelectorAll('.btn-edit');
+
+      const btnEdit = document.querySelectorAll('.img-edit');
       //document.querySelector('#input-post').value = '';
-      btnEdit.forEach(btn => {
+      btnEdit.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           const editDoc = await getPost(e.target.dataset.id);
-          console.log(editDoc.data());
           editStatus = true;
           id = editDoc.id;
           document.querySelector('#input-post').value = editDoc.data().description;
-          document.querySelector('#btn-post').innerText = 'GUARDAR';
-          document.querySelector('#modal-background-post').style.display = 'block';
+          document.querySelector('#btn-post').innerText = 'GUARDAR'
           document.querySelector('#modal-content-post').style.display = 'block';
-
         });
       });
 
       const btnAccept = document.querySelectorAll('.btn-accept-delete');
-      btnAccept.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-           deletePost(e.target.dataset.id);
+      btnAccept.forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+          console.log(e.target.dataset.id)
+          await deletePost( e.target.dataset.id);
+          document.body.style.overflow = 'visible';
         });
       });
 
       const btnExit = document.querySelectorAll('.btn-exit');
       btnExit.forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelector('.container-modal-delete').style.display = 'none';
         document.querySelector('.modal-content-delete').style.display = 'none';
+        document.querySelector('.modal-backgroud-delete').style.display = 'none';
+        document.body.style.overflow = 'visible';
       });
     }); 
       const btnLike = document.querySelectorAll('.img-like');
