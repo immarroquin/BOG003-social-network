@@ -54,6 +54,7 @@ export const home = () => {
   </div>
   </div>
   <div id='div-post'></div>
+  <div id='container-modal-delete'></div>
   <button type='button' id='btn-signout'>Cerrar Sesion</button>
 </main>
 `;
@@ -143,28 +144,40 @@ const uid = firebase.auth().currentUser.uid;
              ` : ''}
    </div>`;
 
-      // const btnSelect = document.querySelectorAll('#btn-select');
-      // btnSelect.forEach(btn => {
-      //   btn.addEventListener('click', () => {
-      //     if (openSelect === false) {
-      //       document.querySelector('#container-selects').style.display = 'block'; 
-      //       openSelect = true;
-      //     }else{
-      //       document.querySelector('#container-selects').style.display = 'none';
-      //       openSelect = false;
-      //     }
-      //   });
-      // });
 
+       const ContainerModalDelete = document.querySelector('#container-modal-delete');
+   ContainerModalDelete.innerHTML += ` 
+  <div id='modal-background-delete'>
+    <div id='modal-content-delete'> 
+      <img src='img/exit.png' class='btn-exit'>
+      <p>¿Desear eliminar tu post?</p>
+      <button type='button' id='btn-accept-delete'>ACEPTAR</button>
+    </div>   
+  </div>`;
 
-      const btnDelete = document.querySelectorAll('.img-delete');
+       const btnDelete = document.querySelectorAll('.img-delete');
       btnDelete.forEach(btn => {
         btn.addEventListener('click', async (e) => {
-          console.log('id del pos ELIMINADO ' + e.target.dataset.id);
-          await   deletePost(e.target.dataset.id);
+        //  console.log('id del pos ELIMINADO ' + e.target.dataset.id);
+      const menssageDelete = confirm('¿Deseas eliminar el post?');
+      if (menssageDelete) {
+        deletePost(e.target.dataset.id);
+      }else {
+        alert('error');
+      }
         });
       });
 
+      /*const btnAccept = document.querySelectorAll('#btn-accept-delete');
+      btnAccept.forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        
+        //ContainerModalDelete.innerHTML = '';            
+         //document.body.style.overflow = 'visible';
+      });
+    });*/
+      
+      
       const btnEdit = document.querySelectorAll('.img-edit');
       btnEdit.forEach(btn => {
         btn.addEventListener('click', async (e) => {
@@ -178,12 +191,6 @@ const uid = firebase.auth().currentUser.uid;
         });
       });
 
-     /* const btnAccept = document.querySelectorAll('.btn-accept-delete');
-      btnAccept.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            document.body.style.overflow = 'visible';
-        });
-      });*/
 
       const btnExit = document.querySelectorAll('.btn-exit');
       btnExit.forEach(btn => {
