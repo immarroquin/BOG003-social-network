@@ -33,7 +33,7 @@ export const home = () => {
   <div id='modal-background-post'>
     <div id='modal-content-post'>
       <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
-      <button disabled type='button' id='btn-post'>PUBLICAR</button>
+      <button disabled type='button' id='btn-post' class='btn-green'>PUBLICAR</button>
     </div>
   </div>
   <div id='div-post'></div>
@@ -54,6 +54,7 @@ export const home = () => {
     const valueInput = inputPost.value.trim();
     if (valueInput == '') {
       document.querySelector('#btn-post').disabled = true;
+      
     } else {
       document.querySelector('#btn-post').disabled = false;
     }
@@ -83,6 +84,8 @@ export const home = () => {
       document.querySelector('#modal-background-post').style.display = 'none';
       document.querySelector('#modal-content-post').style.display = 'none';
     }
+    
+
   });
 
   getPosts().onSnapshot((response) => {
@@ -132,7 +135,8 @@ export const home = () => {
 
       const btnDelete = document.querySelectorAll('.img-delete'); 
       btnDelete.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+          
           document.querySelector('.modal-content-delete').style.display = 'block';
         });
       });
@@ -153,8 +157,9 @@ export const home = () => {
 
       const btnAccept = document.querySelectorAll('.btn-accept-delete');
       btnAccept.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-           deletePost(e.target.dataset.id);
+        btn.addEventListener('click', async (e) => {
+           await deletePost(e.doc.data().id);
+          console.log(e.doc.data().id);
         });
       });
 
