@@ -14,7 +14,7 @@ import {
 } from '../configfirebase.js';
 export const home = () => {
   const divHome = document.createElement('div');
-  divHome.setAttribute('id','div-home');
+  divHome.setAttribute('id', 'div-home'); 
   const viewHome = `
 </html>
 
@@ -33,17 +33,20 @@ export const home = () => {
    <div id='modal-background-post'>
     <div id='modal-content-post'>
     <div id='space-line'>
-      <p>Crear Publicación</p>
-      <img src='img/exit.png' class='btn-exit'>
+    <p>Crear Publicación</p>
+    <img src='img/exit.png' class='btn-exit'>
     </div>
     <div id='line'></div>
     <div id='after-line'>
-      <img id='img-modal-post' src='img/profile.png' alt='profile'>
-      <p>Aqui va el nombre del usuario</p>
-      <input type='text' id='input-post' >
-      <button disabled type='button' id='btn-post'>PUBLICAR</button>
+    <div id='container-img-text'>
+    <img id='img-modal-post' src='img/profile.png' alt='profile'>
+    <div id='container-text'></div>
+    </div>
+    <textarea type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'></textarea>
+      <button disabled type='button' id='btn-post' class='btn-post-inactive'>PUBLICAR</button>
     </div>
    </div>
+  </div>
   </div>
   <div id='div-post'></div>
   <button type='button' id='btn-signout'>Cerrar Sesion</button>
@@ -54,10 +57,11 @@ export const home = () => {
   divHome.innerHTML = viewHome;
   const btnInputModal = divHome.querySelector('#btn-input-modal');
   btnInputModal.addEventListener('click', () => {
-    document.querySelector('#modal-background-post').style.display = 'block';
+    document.querySelector('#modal-background-post').style.display = 'flex';
     document.querySelector('#modal-content-post').style.display = 'block';
     document.body.style.overflow = 'hidden';
     document.querySelector('#input-post').focus();
+    document.querySelector('#input-post').value='';
   });
 
   const inputPost = divHome.querySelector('#input-post');
@@ -96,10 +100,18 @@ export const home = () => {
       document.querySelector('#modal-background-post').style.display = 'none';
       document.querySelector('#modal-content-post').style.display = 'none';
     }
+    
   });
+  
 
-  getPosts().onSnapshot((response) => {
-    const uid = firebase.auth().currentUser.uid;
+  getPosts().onSnapshot((response) => { 
+const nameuid = firebase.auth().currentUser.displayName;
+  const divContainerText = document.querySelector('#container-text');
+  divContainerText.innerHTML = '';
+  divContainerText.innerHTML += ` 
+<p>${nameuid}</p>
+`; 
+const uid = firebase.auth().currentUser.uid;
     const divPosts = document.querySelector('#div-post');
     divPosts.innerHTML = '';
     response.forEach((doc) => {
@@ -122,15 +134,8 @@ export const home = () => {
               <img src='img/edit.png' class='img-edit' data-id='${doc.id}'>
               <img src='img/delete.png' class='img-delete' data-id='${doc.id}'>
             </div>
-             <div class='modal-backgroud-delete'>
-            <div class='modal-content-delete'>
-               <img src='img/exit.png' class='btn-exit'>
-               <p>¿Deseas eliminar este post?</p>
-               <button class='btn-accept-delete' data-id='${doc.id}'>ACEPTAR</button>
-             </div>
-             </div>` : ''}
-  </div>
-                `;
+             ` : ''}
+   </div>`;
 
       // const btnSelect = document.querySelectorAll('#btn-select');
       // btnSelect.forEach(btn => {
@@ -146,51 +151,47 @@ export const home = () => {
       // });
 
 
-      const btnDelete = document.querySelectorAll('.img-delete'); 
-      btnDelete.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          document.querySelector('.modal-backgroud-delete').style.display = 'block';
-          document.querySelector('.modal-content-delete').style.display = 'block';
-         document.body.style.overflow = 'hidden';
+      const btnDelete = document.querySelectorAll('.img-delete');
+      btnDelete.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          console.log('id del pos ELIMINADO ' + e.target.dataset.id);
+          await   deletePost(e.target.dataset.id);
         });
       });
 
       const btnEdit = document.querySelectorAll('.img-edit');
-      //document.querySelector('#input-post').value = '';
-      btnEdit.forEach((btn) => {
+      btnEdit.forEach(btn => {
         btn.addEventListener('click', async (e) => {
           const editDoc = await getPost(e.target.dataset.id);
           editStatus = true;
           id = editDoc.id;
           document.querySelector('#input-post').value = editDoc.data().description;
-          document.querySelector('#btn-post').innerText = 'GUARDAR'
+          document.querySelector('#btn-post').innerText = 'GUARDAR';
+          document.querySelector('#modal-background-post').style.display = 'flex';
           document.querySelector('#modal-content-post').style.display = 'block';
         });
       });
 
-      const btnAccept = document.querySelectorAll('.btn-accept-delete');
-      btnAccept.forEach((btn) => {
-        btn.addEventListener('click', async (e) => {
-          console.log(e.target.dataset.id)
-          await deletePost( e.target.dataset.id);
-          document.body.style.overflow = 'visible';
+     /* const btnAccept = document.querySelectorAll('.btn-accept-delete');
+      btnAccept.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.body.style.overflow = 'visible';
         });
-      });
+      });*/
 
       const btnExit = document.querySelectorAll('.btn-exit');
       btnExit.forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelector('.modal-content-delete').style.display = 'none';
-        document.querySelector('.modal-backgroud-delete').style.display = 'none';
-        document.body.style.overflow = 'visible';
+        btn.addEventListener('click', () => {
+          document.querySelector('#modal-background-post').style.display = 'none';
+          document.querySelector('#modal-content-post').style.display = 'none';
+          document.body.style.overflow = 'visible';
+        });
       });
-    }); 
       const btnLike = document.querySelectorAll('.img-like');
       btnLike.forEach(btn => {
         btn.addEventListener('click', async (e) => {
           const likeDoc = await getPost(e.target.dataset.id);
           const likeUser = likeDoc.data().likes;
-          console.log(likeUser);
           if (likeUser.includes(uid)) {
             dislike(uid, e.target.dataset.id);
           } else {
