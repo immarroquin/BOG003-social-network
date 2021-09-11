@@ -201,7 +201,7 @@ align-items: center;
     width: 100%;
     position: fixed;
     z-index: 4;
-    background-color: rgba(102, 102, 102, 0.562);
+    background-color: rgba(63, 63, 63, 0.664);
     display: none;
     align-items: center;
     justify-content: center;
@@ -251,8 +251,18 @@ flex-direction: column;
 .img-edit, .img-delete {
   width: 24px;
 }
+#container-modal-delete{
+  display: none;
+}
 
-/*.modal-content-delete {
+#modal-background-delete {
+
+  border: 2px solid rgb(128, 0, 43);
+  height: 200px;
+  width: 70%;
+display: none;
+}
+#modal-content-delete {
   border: 2px solid green;
   position: relative;
   display: none;
@@ -261,7 +271,7 @@ flex-direction: column;
   z-index: 4;
   background-color: aliceblue;
   left: 25%;
-}*/
+}
 #div-home{
   background-color: rgb(247,247,247);
 }
