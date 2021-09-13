@@ -32,14 +32,9 @@ export const home = () => {
   </div>
    <div id='modal-background-post'>
     <div id='modal-content-post'>
-<<<<<<< HEAD
-      <input type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'>
-      <button disabled type='button' id='btn-post' class='btn-green'>PUBLICAR</button>
-=======
     <div id='space-line'>
     <p>Crear Publicación</p>
     <img src='img/exit.png' class='btn-exit'>
->>>>>>> 854b807b96bd5f31fa85e7191a422009677f48ce
     </div>
     <div id='line'></div>
     <div id='after-line'>
