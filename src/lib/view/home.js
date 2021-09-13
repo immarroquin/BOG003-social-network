@@ -156,7 +156,7 @@ const uid = firebase.auth().currentUser.uid;
         //  console.log('id del pos ELIMINADO ' + e.target.dataset.id);
       const menssageDelete = confirm('¿Deseas eliminar el post?');
       if (menssageDelete) {
-        deletePost(e.target.dataset.id);
+        await deletePost(e.target.dataset.id);
       }else {
         alert('error');
       }
