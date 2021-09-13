@@ -8,7 +8,7 @@ html {
 }
 #container {           /*contenedor general (contiene todas las pantallas*/
   justify-content: center;
-  background-color: white;
+  height: 100vh;
 }
 
 .img-logo-white { /*Logos*/
@@ -44,7 +44,7 @@ html {
  
 }
 #errorMessageLogin{ /*contenedor mensaje de error de login*/
-  margin-top: 5%;
+  margin-top: 3%;
   font-size: 20px;
   font-weight: bolder;
   font-family: 'Roboto', sans-serif;
@@ -98,6 +98,7 @@ cursor: pointer;
   flex-direction: column;
   align-items: center;
   background-color: rgb(58, 57, 57);
+  padding-bottom: 2%;
   height: 100vh;
 }
 
@@ -448,4 +449,49 @@ color: #333;
   font-weight: bold;
   color: #333;
   width: 100%;
+}
+
+@media only screen and (min-width: 620px) and (max-width: 900px) {
+  .img-logo-white { /*Logos*/
+    width: 67%;
+    margin-top:9%;
+  }
+  .input-login { /*contenedor padre de los input de login*/
+    margin-top: 5%;
+  }
+  #email,
+  #password {  /*input de login*/
+    width: 370px;
+    height: 50px;
+    margin-top: 10%;
+  }
+  .div-login {  /*contenedor de boton, parrafos y logo google login*/
+    margin-top: 5%;
+  }
+  .div-login p{ 
+    font-size: 29px;
+}
+}
+@media only screen and (min-width: 901px) and (max-width: 1350px) {
+  .img-logo-white { /*Logos*/
+    width: 50%;
+    margin-top:10%;
+  }
+    .div-login {  /*contenedor de boton, parrafos y logo google login*/
+      margin-top: 2%;
+    }
+    #email,
+    #password {  /*input de login*/
+      width: 390px;
+      height: 50px;
+    }
+    .div-login p{ 
+      margin-top: 10%;
+        font-size: 35px;
+    }
+    #btn-login{ /*botones de logueo y registro*/
+      height: 50px;
+      width: 270px;
+      font-size: 28px;
+    }
 }
