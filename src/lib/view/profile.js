@@ -19,10 +19,12 @@ export const profile = () => {
     <main id='main-profile'>
         <div id='container-user-profile'></div>
         <div class='container-images'>
-        <h3>Proximamente más funciones</h3>
+        <img id='imgprofile-functions' src='img/imgprofilefunctions.jpg' alt='logo' >
       </div>
-      <button type='button' id='btn-signout'>Cerrar Sesion</button>
-    </main>`;
+      <button type='button' id='btn-signout'>CERRAR SESIÓN</button>
+    </main>
+    <footer id='footers'>©️ 2021 desarrollado por Diana, Gabriela y Lorena
+</footer>`;
 
     divProfile.innerHTML = viewProfile;
 

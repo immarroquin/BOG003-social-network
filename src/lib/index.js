@@ -58,30 +58,23 @@ export const post = (describe, nameuid, uid, date) => {
     description: describe,
     nameUser: nameuid,
     uidUser: uid,
-    currentDate : date,
-    likes : [],
-  })
-    .then((docRef) => {
-      console.log('id del post creado', docRef.id);
-    })
-    .catch((error) => {
-      console.error('id errado', error);
-    });
+    currentDate: date,
+    likes: [],
+  });
 };
 
 export const getPosts = () => firebase.firestore().collection('posts');
 
-export const deletePost= (idPost) => firebase.firestore().collection('posts').doc(idPost).delete();
+export const deletePost = (idPost) => firebase.firestore().collection('posts').doc(idPost).delete();
 
-export const getPost= (id) => firebase.firestore().collection('posts').doc(id).get();
+export const getPost = (id) => firebase.firestore().collection('posts').doc(id).get();
 
-export const updatePost= (id, updatePost) => firebase.firestore().collection('posts').doc(id).update(updatePost);
+export const updatePost = (id, updatePosts) => firebase.firestore().collection('posts').doc(id).update(updatePosts);
 
-export const like = (uid , idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
-likes: firebase.firestore.FieldValue.arrayUnion(uid),
+export const like = (uid, idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
+  likes: firebase.firestore.FieldValue.arrayUnion(uid),
 }));
 
-export const dislike = (uid , idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
+export const dislike = (uid, idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
   likes: firebase.firestore.FieldValue.arrayRemove(uid),
-  }));
-  
+}));
