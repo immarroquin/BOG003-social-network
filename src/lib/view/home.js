@@ -159,6 +159,7 @@ const uid = firebase.auth().currentUser.uid;
       btn.addEventListener('click', async () => {
         await deletePost(currentPostId);
         console.log(currentPostId); 
+        document.querySelector('#container-modal-delete').style.display = 'none';
         document.body.style.overflow = 'visible';
       });
     });
