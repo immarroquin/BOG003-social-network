@@ -1,5 +1,4 @@
 import {
-  signOut,
   post,
   getPosts,
   deletePost,
@@ -17,12 +16,11 @@ export const home = () => {
   divHome.setAttribute('id', 'div-home'); 
   const viewHome = `
 </html>
-
 <header id='hder'>
 <img id='logo-hder' src='img/logolaborafdonegro.png' alt='logo'>
 <div class='container-images'>
-<img id='img-home' src='img/Home.png' alt='home'>
-<img id='img-profile' src='img/profile.png' alt='profile'>
+<a href='#/home'><img id='img-home' src='img/Home.png' alt='home'></a>
+<a href='#/profile'><img id='img-profile' src='img/profile.png' alt='profile'></a>
 </div>
 </header>
 <main id='container-posts'>
@@ -50,9 +48,9 @@ export const home = () => {
   </div>
   <div id='div-post'></div>
   <div id='container-modal-delete'></div>
-  <button type='button' id='btn-signout'>Cerrar Sesion</button>
 </main>
 `;
+  let currentPostId = '';
   let editStatus = false;
   let id = '';
   divHome.innerHTML = viewHome;
@@ -70,7 +68,6 @@ export const home = () => {
     const valueInput = inputPost.value.trim();
     if (valueInput == '') {
       document.querySelector('#btn-post').disabled = true;
-      
     } else {
       document.querySelector('#btn-post').disabled = false;
     }
@@ -86,7 +83,6 @@ export const home = () => {
     document.body.style.overflow = 'visible';
     if (describe !== '') {
       document.querySelector('#input-post').value = '';
-    
       if (!editStatus) {
         await post(describe, nameuid, uid, date);
       } else {
@@ -102,17 +98,15 @@ export const home = () => {
       document.querySelector('#modal-background-post').style.display = 'none';
       document.querySelector('#modal-content-post').style.display = 'none';
     }
-    
   });
   
-
   getPosts().onSnapshot((response) => { 
 const nameuid = firebase.auth().currentUser.displayName;
   const divContainerText = document.querySelector('#container-text');
   divContainerText.innerHTML = '';
-  divContainerText.innerHTML += ` 
+  divContainerText.innerHTML += `
 <p>${nameuid}</p>
-`; 
+`;
 const uid = firebase.auth().currentUser.uid;
     const divPosts = document.querySelector('#div-post');
     divPosts.innerHTML = '';
@@ -127,6 +121,7 @@ const uid = firebase.auth().currentUser.uid;
       </div>
     </div>
          <p id='description-post'>${doc.data().description}</p>
+         <p id='description-post'>${doc.id}</p>
        <div id='container-likes'>
           ${doc.data().likes.includes(uid) ? `
          <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></` : ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>`} 
@@ -139,39 +134,34 @@ const uid = firebase.auth().currentUser.uid;
              ` : ''}
    </div>`;
 
-
-       const ContainerModalDelete = document.querySelector('#container-modal-delete');
-   ContainerModalDelete.innerHTML += ` 
-  <div id='modal-background-delete'>
-    <div id='modal-content-delete'> 
-      <img src='img/exit.png' class='btn-exit'>
-      <p>¿Desear eliminar tu post?</p>
-      <button type='button' id='btn-accept-delete'>ACEPTAR</button>
-    </div>   
+  const ContainerModalDelete = document.querySelector('#container-modal-delete');
+  ContainerModalDelete.innerHTML = `
+  <div id='modal-content-delete'>
+  <div id='container-img-exit'>
+    <img src='img/exit.png' class='btn-exit'>
+    </div>
+    <p>¿Desear eliminar tu post?</p>
+    <button type='button' id='btn-accept-delete'>ACEPTAR</button>
   </div>`;
 
        const btnDelete = document.querySelectorAll('.img-delete');
       btnDelete.forEach(btn => {
         btn.addEventListener('click', async (e) => {
-        //  console.log('id del pos ELIMINADO ' + e.target.dataset.id);
-      const menssageDelete = confirm('¿Deseas eliminar el post?');
-      if (menssageDelete) {
-        await deletePost(e.target.dataset.id);
-      }else {
-        alert('error');
-      }
+        document.querySelector('#container-modal-delete').style.display = 'flex';
+        document.querySelector('#modal-content-delete').style.display = 'block';
+        // document.body.style.overflow = 'hidden';
+        currentPostId = e.target.dataset.id;
         });
       });
 
-      /*const btnAccept = document.querySelectorAll('#btn-accept-delete');
+      const btnAccept = document.querySelectorAll('#btn-accept-delete');
       btnAccept.forEach(btn => {
-      btn.addEventListener('click', async (e) => {
-        
-        //ContainerModalDelete.innerHTML = '';            
-         //document.body.style.overflow = 'visible';
+      btn.addEventListener('click', async () => {
+        await deletePost(currentPostId);
+        console.log(currentPostId); 
+        document.body.style.overflow = 'visible';
       });
-    });*/
-      
+    });
       
       const btnEdit = document.querySelectorAll('.img-edit');
       btnEdit.forEach(btn => {
@@ -186,12 +176,13 @@ const uid = firebase.auth().currentUser.uid;
         });
       });
 
-
       const btnExit = document.querySelectorAll('.btn-exit');
       btnExit.forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelector('#modal-background-post').style.display = 'none';
           document.querySelector('#modal-content-post').style.display = 'none';
+          document.querySelector('#container-modal-delete').style.display = 'none';
+          document.querySelector('#modal-content-delete').style.display = 'none';
           document.body.style.overflow = 'visible';
         });
       });
@@ -211,10 +202,5 @@ const uid = firebase.auth().currentUser.uid;
 
   });
 
-
-  const btnSignOut = divHome.querySelector('#btn-signout');
-  btnSignOut.addEventListener('click', () => {
-    signOut();
-  });
   return divHome;
 };

@@ -30,9 +30,7 @@ export const register = () => {
   <button type='button' class='btn-google'>
   <img src='img/google.png' id='img-google'>
   </button>
-
   <p>¿Ya te registraste? <a href='' id='link-login'>Inicia sesión</a></p>
-  
   </div>
   `;
   divRegister.innerHTML = viewRegister;

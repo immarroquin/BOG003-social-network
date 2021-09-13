@@ -253,25 +253,33 @@ flex-direction: column;
   width: 24px;
 }
 #container-modal-delete{
-  display: none;
-}
-
-#modal-background-delete {
-
-  border: 2px solid rgb(128, 0, 43);
-  height: 200px;
-  width: 70%;
-display: none;
+  height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 4;
+    background-color: rgba(63, 63, 63, 0.664);
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 #modal-content-delete {
+  height: 150px;
+  width: 80%;
   border: 2px solid green;
-  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  position: fixed;
   display: none;
   transform: translateY(-50%);
   top: 50%;
   z-index: 4;
-  background-color: aliceblue;
-  left: 25%;
+  padding: 5%;
+}
+#container-img-exit{
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  border: 2px solid blue;
 }
 #div-home{
   background-color: rgb(247,247,247);
@@ -308,12 +316,12 @@ display: none;
   border-radius: 10px;
   margin-top: 80px;
   height: 100px;
-    width: 90%;
-    background-color: white;
-    box-shadow: 1px 2px 4px rgb(155, 154, 154);
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-around;
+  width: 90%;
+  background-color: white;
+  box-shadow: 1px 2px 4px rgb(155, 154, 154);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
 }
 #img-input{
   width: 60px;
@@ -353,7 +361,7 @@ display: none;
     padding: 7px 20px 7px 20px;
 }
 .btn-exit{
-  width: 25px;
+  width: 30px;
 }
 #line{
   border-top: 1.5px solid rgb(95, 95, 95);
@@ -453,6 +461,20 @@ color: #333;
   font-weight: bold;
   color: #333;
   width: 100%;
+}
+#main-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#container-user-profile{
+  margin-top: 80px;
+  height: 100px;
+  width: 90%;
+  border: 2px solid green;
+}
+#img-user-profile {
+  width: 60px;
 }
 
 @media only screen and (min-width: 620px) and (max-width: 900px) {
