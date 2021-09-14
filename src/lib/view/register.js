@@ -31,8 +31,7 @@ export const register = () => {
   <img src='img/google.png' id='img-google'>
   </button>
   <p>¿Ya te registraste? <a href='' id='link-login'>Inicia sesión</a></p>
-  </div>
-  `;
+  </div>`;
   divRegister.innerHTML = viewRegister;
   const btnRegister = divRegister.querySelector('#btn-register');
   btnRegister.addEventListener('click', () => {

@@ -4,6 +4,7 @@ import {
   signOut,
   authLogin,
   loginGoogle,
+  post,
 } from '../src/lib/index.js';
 
 const firebasemock = require('firebase-mock');
@@ -65,9 +66,7 @@ describe('loginGoogle', () => {
 
   it('debería tomar las credenciales de google y direccionar al usuario a una nueva ruta', () => {
     loginGoogle('laboratorians@hotmail.com');
-    console.log('HOLAAAA');
     firebase.auth().signInWithPopup('laboratorians@gmail.com').then((response) => {
-      console.log(response);
       expect(response).toBe('#/home');
     });
   });

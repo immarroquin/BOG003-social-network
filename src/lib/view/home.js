@@ -8,12 +8,10 @@ import {
   dislike,
 } from '../index.js';
 // eslint-disable-next-line
-import {
-  defaultApp
-} from '../configfirebase.js';
+import {defaultApp} from '../configfirebase.js';
 export const home = () => {
   const divHome = document.createElement('div');
-  divHome.setAttribute('id', 'div-home'); 
+  divHome.setAttribute('id', 'div-home');
   const viewHome = `
 </html>
 <header id='hder'>
@@ -49,6 +47,8 @@ export const home = () => {
   <div id='div-post'></div>
   <div id='container-modal-delete'></div>
 </main>
+<footer id='footers'>©️ 2021 desarrollado por Diana, Gabriela y Lorena
+</footer>
 `;
   let currentPostId = '';
   let editStatus = false;
@@ -60,13 +60,13 @@ export const home = () => {
     document.querySelector('#modal-content-post').style.display = 'block';
     document.body.style.overflow = 'hidden';
     document.querySelector('#input-post').focus();
-    document.querySelector('#input-post').value='';
+    document.querySelector('#input-post').value = '';
   });
 
   const inputPost = divHome.querySelector('#input-post');
   inputPost.addEventListener('keyup', () => {
     const valueInput = inputPost.value.trim();
-    if (valueInput == '') {
+    if (valueInput === '') {
       document.querySelector('#btn-post').disabled = true;
     } else {
       document.querySelector('#btn-post').disabled = false;
@@ -78,50 +78,49 @@ export const home = () => {
     const describe = document.querySelector('#input-post').value;
     const nameuid = firebase.auth().currentUser.displayName;
     const uid = firebase.auth().currentUser.uid;
-    const getdate = new Date();
-    const date = getdate.getDate() + '/' + (getdate.getMonth() + 1) + '/' + getdate.getFullYear();
     document.body.style.overflow = 'visible';
     if (describe !== '') {
       document.querySelector('#input-post').value = '';
       if (!editStatus) {
-        await post(describe, nameuid, uid, date);
+        await post(describe, nameuid, uid);
       } else {
         await updatePost(id, {
           description: describe,
           nameUser: nameuid,
           uidUser: uid,
-          currentDate: date,
-        })
+          currentDate: new Date(),
+        });
       }
       editStatus = false;
       document.querySelector('#btn-post').innerText = 'PUBLICAR';
       document.querySelector('#modal-background-post').style.display = 'none';
       document.querySelector('#modal-content-post').style.display = 'none';
     }
+    document.querySelector('#btn-post').disabled = true;
   });
-  
-  getPosts().onSnapshot((response) => { 
-const nameuid = firebase.auth().currentUser.displayName;
-  const divContainerText = document.querySelector('#container-text');
-  divContainerText.innerHTML = '';
-  divContainerText.innerHTML += `
-<p>${nameuid}</p>
-`;
-const uid = firebase.auth().currentUser.uid;
+  getPosts().onSnapshot((response) => {
+    const nameuid = firebase.auth().currentUser.displayName;
+    const divContainerText = document.querySelector('#container-text');
+    divContainerText.innerHTML = '';
+    divContainerText.innerHTML += `
+    <p>${nameuid}</p>
+    `;
+    const uid = firebase.auth().currentUser.uid;
     const divPosts = document.querySelector('#div-post');
     divPosts.innerHTML = '';
     response.forEach((doc) => {
+      const getdate = new Date(doc.data().currentDate.seconds * 1000);
+      const date = `${getdate.getDate()}/${(getdate.getMonth() + 1)}/${getdate.getFullYear()}`;
       divPosts.innerHTML += `
  <div class= 'card-post'>
     <div id='container-user-data'>
      <img id='img-post' src='img/profile.png' alt='profile'>
       <div id='container-data'>
         <p id='user-name'>${doc.data().nameUser}</p>
-        <p id='date'>${doc.data().currentDate}</p>
+        <p id='date'>${date}</p>
       </div>
     </div>
          <p id='description-post'>${doc.data().description}</p>
-         <p id='description-post'>${doc.id}</p>
        <div id='container-likes'>
           ${doc.data().likes.includes(uid) ? `
          <img src='img/like.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span></` : ` <img src='img/dislike.png' class='img-like' data-id='${doc.id}'><span>${doc.data().likes.length}</span>`} 
@@ -134,38 +133,38 @@ const uid = firebase.auth().currentUser.uid;
              ` : ''}
    </div>`;
 
-  const ContainerModalDelete = document.querySelector('#container-modal-delete');
-  ContainerModalDelete.innerHTML = `
+      const ContainerModalDelete = document.querySelector('#container-modal-delete');
+      ContainerModalDelete.innerHTML = `
   <div id='modal-content-delete'>
   <div id='container-img-exit'>
     <img src='img/exit.png' class='btn-exit'>
     </div>
+    <div id='content-modal-delete'>
     <p>¿Desear eliminar tu post?</p>
     <button type='button' id='btn-accept-delete'>ACEPTAR</button>
+    </div>
   </div>`;
 
-       const btnDelete = document.querySelectorAll('.img-delete');
-      btnDelete.forEach(btn => {
+      const btnDelete = document.querySelectorAll('.img-delete');
+      btnDelete.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
-        document.querySelector('#container-modal-delete').style.display = 'flex';
-        document.querySelector('#modal-content-delete').style.display = 'block';
-        // document.body.style.overflow = 'hidden';
-        currentPostId = e.target.dataset.id;
+          document.querySelector('#container-modal-delete').style.display = 'flex';
+          document.querySelector('#modal-content-delete').style.display = 'block';
+          document.body.style.overflow = 'hidden';
+          currentPostId = e.target.dataset.id;
         });
       });
 
       const btnAccept = document.querySelectorAll('#btn-accept-delete');
-      btnAccept.forEach(btn => {
-      btn.addEventListener('click', async () => {
-        await deletePost(currentPostId);
-        console.log(currentPostId); 
-        document.querySelector('#container-modal-delete').style.display = 'none';
-        document.body.style.overflow = 'visible';
+      btnAccept.forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          await deletePost(currentPostId);
+          document.querySelector('#container-modal-delete').style.display = 'none';
+          document.body.style.overflow = 'visible';
+        });
       });
-    });
-      
       const btnEdit = document.querySelectorAll('.img-edit');
-      btnEdit.forEach(btn => {
+      btnEdit.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           const editDoc = await getPost(e.target.dataset.id);
           editStatus = true;
@@ -178,8 +177,9 @@ const uid = firebase.auth().currentUser.uid;
       });
 
       const btnExit = document.querySelectorAll('.btn-exit');
-      btnExit.forEach(btn => {
+      btnExit.forEach((btn) => {
         btn.addEventListener('click', () => {
+          document.querySelector('#btn-post').innerText = 'PUBLICAR';
           document.querySelector('#modal-background-post').style.display = 'none';
           document.querySelector('#modal-content-post').style.display = 'none';
           document.querySelector('#container-modal-delete').style.display = 'none';
@@ -188,7 +188,7 @@ const uid = firebase.auth().currentUser.uid;
         });
       });
       const btnLike = document.querySelectorAll('.img-like');
-      btnLike.forEach(btn => {
+      btnLike.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           const likeDoc = await getPost(e.target.dataset.id);
           const likeUser = likeDoc.data().likes;
@@ -200,8 +200,6 @@ const uid = firebase.auth().currentUser.uid;
         });
       });
     });
-
   });
-
   return divHome;
 };

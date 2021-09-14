@@ -1,13 +1,10 @@
-import { signOut, getPosts } from '../index.js';
+import { signOut } from '../index.js';
 // eslint-disable-next-line
-import {
-    defaultApp
-} from '../configfirebase.js';
-
+import { defaultApp } from '../configfirebase.js';
 export const profile = () => {
-    const divProfile = document.createElement('div');
-    divProfile.setAttribute('id', 'div-profile');
-    const viewProfile = `
+  const divProfile = document.createElement('div');
+  divProfile.setAttribute('id', 'div-profile');
+  const viewProfile = `
     </html>
     <header id='hder'>
       <img id='logo-hder' src='img/logolaborafdonegro.png' alt='logo'>
@@ -19,27 +16,25 @@ export const profile = () => {
     <main id='main-profile'>
         <div id='container-user-profile'></div>
         <div class='container-images'>
-        <h3>Proximamente más funciones</h3>
+        <img id='imgprofile-functions' src='img/imgprofilefunctions.jpg' alt='logo' >
       </div>
-      <button type='button' id='btn-signout'>Cerrar Sesion</button>
-    </main>`;
+      <button type='button' id='btn-signout'>CERRAR SESIÓN</button>
+    </main>
+    <footer id='footers'>©️ 2021 desarrollado por Diana, Gabriela y Lorena
+</footer>`;
 
-    divProfile.innerHTML = viewProfile;
-
-    getPosts().onSnapshot(() => {
-        const nameuid = firebase.auth().currentUser.displayName;
-
-        const containerUserProfile = document.querySelector('#container-user-profile');
-        containerUserProfile.innerHTML = '';
-        containerUserProfile.innerHTML += `
-        <img id='img-user-profile' src='img/profile.png' alt='profile'>
-        <p>${nameuid}</p>
-        `;
-    });
-
-    const btnSignOut = divProfile.querySelector('#btn-signout');
-    btnSignOut.addEventListener('click', () => {
-        signOut();
-    });
-    return divProfile;
-}
+  divProfile.innerHTML = viewProfile;
+  firebase.auth().onAuthStateChanged((user) => {
+    const nameuid = user.displayName;
+    const containerUserProfile = document.querySelector('#container-user-profile');
+    containerUserProfile.innerHTML = `
+    <img id='img-user-profile' src='img/profile.png' alt='profile'>
+    <p>${nameuid}</p>
+    `;
+  });
+  const btnSignOut = divProfile.querySelector('#btn-signout');
+  btnSignOut.addEventListener('click', () => {
+    signOut();
+  });
+  return divProfile;
+};

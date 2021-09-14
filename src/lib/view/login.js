@@ -24,8 +24,7 @@ export const login = () => {
   <button type='button' class='btn-google'>
   <img src='img/google.png' id='img-google'></button>
   <p>Si no tienes cuenta <a href='#/register' id='link-register'>Registrate</a></p>
-  </div>
-  `;
+  </div>`;
   divLogin.innerHTML = viewLogin;
   const btnLogin = divLogin.querySelector('#btn-login');
   btnLogin.addEventListener('click', () => {
