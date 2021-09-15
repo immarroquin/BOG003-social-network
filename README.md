@@ -5,23 +5,23 @@
 
 ## Índice
 
-* [1. Definición del Producto](#1-Definición del Producto)
-* [2. Investigacion UX](#2-Investigacion UX)
-* [3. Historias de usuario](#3-Historias de usuario)
-* [4. Protipos de baja y alta fidelidad](#4-Protipos de baja y alta fidelidad)
-* [5. Comportamiento UI](#5-Comportamiento UI)
-* [6. Producto final](#6-Producto final)
-* [7. Test Unitario](#7-Test Unitario)
-* [8. Objetivos de aprendizaje](#8-Objetivos de aprendizaje)
+* [1. Definición del Producto](#1-Definición-del-Producto)
+* [2. Investigacion UX](#2-Investigacion-UX)
+* [3. Historias de usuario](#3-Historias-de-usuario)
+* [4. Prototipos de baja y alta fidelidad](#4-Prototipos-de-baja-y-alta-fidelidad)
+* [5. Comportamiento UI](#5-Comportamiento-UI)
+* [6. Producto final](#6-Producto-final)
+* [7. Test Unitario](#7-Test-Unitario)
+* [8. Objetivos de aprendizaje](#8-Objetivos-de-aprendizaje)
 
 ## 1. Definición del Producto
 
 Laboratorian es una red social dirigida a egresadas, estudiantes, equipo e interesadxs de la experiencia que ofrece el bootcamp, con el fin de que lxs usuarixs puedan compartir sus experiencias relacionadas con Laboratoria.
 
-#### Quiénes son los principales usuarios de producto
+#### * Quiénes son los principales usuarios de producto
 Estudiantes, Egresadas, integrantes  del equipo y personas interesadas de la experiencia que ofrece Laboratoria.
 
-#### Qué problema resuelve el producto
+#### * Qué problema resuelve el producto
 Promueve el fortalecimiento de la comunidad, integra a quienes se interesan por la experiencia en Laboratoria, motiva e inspira a quienes inician en el proceso por medio de las experiencias compartidas.
 
 
@@ -62,31 +62,31 @@ Realizamos investigacion UX a traves de una encuesta para conocer  nuestro usuar
 #### Prototipo alta fidelidad desktop
 ![imagen prototipo de alta fidelidad desktop](./src/img/prototipodesktop.png)
 
-#### Figma
+#### Figma 
 [Prototipo Figma](https://www.figma.com/file/N640coMwcQeN7Y4lYQo5i6/Social-Network-%3CL%3E?node-id=0%3A1)
 
 ## 5. Comportamiento UI
 
-#### Creación de cuenta de usuario e inicio de sesión
-* Login con Firebase:
+### Creación de cuenta de usuario e inicio de sesión
+ #### Login con Firebase:
  - Login para ingreso.
  - Creación de cuenta de acceso y autenticación con cuenta de correo y contraseña, y también con una cuenta de Google.
   
-* Validaciones:
+#### Validaciones:
  - Solamente se permite el acceso a usuarios con cuentas válidas.
  - No pueden haber usuarios repetidos.
  - La cuenta de usuario debe ser un correo electrónico válido.
  - Lo que se escriba en el campo (input) de contraseña debe ser secreto con un minimo de caracteres.
 
-* Comportamiento:
+#### Comportamiento:
 - Cuando envia el formulario de registro o inicio de sesión, se valida.
 - Si hay errores, se muestran mensajes descriptivos para ayudar al usuario a corregirlos.
 
-#### Muro
-* Validaciones:
+### Muro
+#### Validaciones:
 - Al publicar, se valida que exista contenido en el input.
 
-* Comportamiento:
+#### Comportamiento:
 - Al recargar la aplicación, se verifica que el usuario este logueado antes de mostrar contenido.
 - Se puede publicar un post en tiempo real.
 - Se puede dar y quitar like a una publicación. Máximo uno por usuario.
@@ -97,8 +97,8 @@ Realizamos investigacion UX a traves de una encuesta para conocer  nuestro usuar
 - Al guardar los cambios se puede cambiar de vuelta a un texto normal pero con la información editada.
 - Al recargar la página se puede ver los textos editados.
 
-#### Profile
-* Comportamiento:
+### Profile
+#### Comportamiento:
 - Se puede cerrar sesion.
 - Puede visualizar el nombre de usuario
   
@@ -109,6 +109,8 @@ Realizamos investigacion UX a traves de una encuesta para conocer  nuestro usuar
 ![imagen Register](./src/img/register.png)
 ![imagen Feed](./src/img/muro.png)
 ![imagen Profile](./src/img/profileapp.png)
+
+[Prototipo Figma](https://dimarbu.github.io/BOG003-social-network/src/)
 
 ## 7. Test Unitario
 
