@@ -51,7 +51,6 @@ export const register = () => {
           setTimeout(() => {
             document.querySelector('#modalContent').style.display = 'none';
           }, 3000);
-          // const user = userCredential.user;
           formRegister.reset();
         })
         .catch((error) => {
@@ -81,7 +80,7 @@ export const register = () => {
 
   const btnGoogleRegister = divRegister.querySelector('.btn-google');
   btnGoogleRegister.addEventListener('click', () => {
-    loginGoogle();
+    loginGoogle();// Funcion loginGoogle() para iniciar sesion con credenciales de google
   });
   return divRegister;
 };

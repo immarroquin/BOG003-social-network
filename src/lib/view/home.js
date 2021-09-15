@@ -50,12 +50,12 @@ export const home = () => {
 <footer id='footers'>©️ 2021 desarrollado por Diana, Gabriela y Lorena
 </footer>
 `;
-  let currentPostId = '';
-  let editStatus = false;
-  let id = '';
+  let currentPostId = ''; // Variable que tomara el valor de del id del post en evento eliminar y aceptar
+  let editStatus = false; // Variable (bandera) que cambiara estado en evento editar
+  let id = ''; // Variable que traera el post con su respectivo id en el evento editar
   divHome.innerHTML = viewHome;
   const btnInputModal = divHome.querySelector('#btn-input-modal');
-  btnInputModal.addEventListener('click', () => {
+  btnInputModal.addEventListener('click', () => { // evento que mostrara la modal para publicar
     document.querySelector('#modal-background-post').style.display = 'flex';
     document.querySelector('#modal-content-post').style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -64,28 +64,29 @@ export const home = () => {
   });
 
   const inputPost = divHome.querySelector('#input-post');
-  inputPost.addEventListener('keyup', () => {
+  inputPost.addEventListener('keyup', () => { // evento del textarea
     const valueInput = inputPost.value.trim();
+    // trim() metodo que no permite activar boton con espacio
     if (valueInput === '') {
-      document.querySelector('#btn-post').disabled = true;
+      document.querySelector('#btn-post').disabled = true; // boton publicar inactivo
     } else {
-      document.querySelector('#btn-post').disabled = false;
+      document.querySelector('#btn-post').disabled = false; // boton publicar activo
     }
   });
 
-  const btnPost = divHome.querySelector('#btn-post');
+  const btnPost = divHome.querySelector('#btn-post'); // boton publicar
   btnPost.addEventListener('click', async () => {
-    const describe = document.querySelector('#input-post').value;
+    const describe = document.querySelector('#input-post').value; // describe como valor del input
     const nameuid = firebase.auth().currentUser.displayName;
     const uid = firebase.auth().currentUser.uid;
     document.body.style.overflow = 'visible';
-    if (describe !== '') {
+    if (describe !== '') { // validacion de input vacio
       document.querySelector('#input-post').value = '';
       if (!editStatus) {
         await post(describe, nameuid, uid);
       } else {
         await updatePost(id, {
-          description: describe,
+          description: describe, // describe como valor del input y como valor del objeto
           nameUser: nameuid,
           uidUser: uid,
           currentDate: new Date(),
@@ -101,7 +102,7 @@ export const home = () => {
   getPosts().onSnapshot((response) => {
     const nameuid = firebase.auth().currentUser.displayName;
     const divContainerText = document.querySelector('#container-text');
-    divContainerText.innerHTML = '';
+    divContainerText.innerHTML = '';// Template que imprime nombre de usuario en modal publicar
     divContainerText.innerHTML += `
     <p>${nameuid}</p>
     `;
@@ -134,6 +135,7 @@ export const home = () => {
    </div>`;
 
       const ContainerModalDelete = document.querySelector('#container-modal-delete');
+      // Template de modal para confirmar eliminacion de post
       ContainerModalDelete.innerHTML = `
   <div id='modal-content-delete'>
   <div id='container-img-exit'>
@@ -144,7 +146,7 @@ export const home = () => {
     <button type='button' id='btn-accept-delete'>ACEPTAR</button>
     </div>
   </div>`;
-
+      // Evento que abrira modal para confirmar eliminacion del post
       const btnDelete = document.querySelectorAll('.img-delete');
       btnDelete.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
@@ -154,7 +156,7 @@ export const home = () => {
           currentPostId = e.target.dataset.id;
         });
       });
-
+      // Evento que confirma la eliminacion del post
       const btnAccept = document.querySelectorAll('#btn-accept-delete');
       btnAccept.forEach((btn) => {
         btn.addEventListener('click', async () => {
@@ -163,6 +165,7 @@ export const home = () => {
           document.body.style.overflow = 'visible';
         });
       });
+      // Evento para editar un post
       const btnEdit = document.querySelectorAll('.img-edit');
       btnEdit.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
@@ -175,7 +178,7 @@ export const home = () => {
           document.querySelector('#modal-content-post').style.display = 'block';
         });
       });
-
+      // Evento para cerra modales
       const btnExit = document.querySelectorAll('.btn-exit');
       btnExit.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -187,12 +190,13 @@ export const home = () => {
           document.body.style.overflow = 'visible';
         });
       });
+      // Evento para like y dislike
       const btnLike = document.querySelectorAll('.img-like');
       btnLike.forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           const likeDoc = await getPost(e.target.dataset.id);
           const likeUser = likeDoc.data().likes;
-          if (likeUser.includes(uid)) {
+          if (likeUser.includes(uid)) { // Valida si uid esta agregado en likeuser (objeto)
             dislike(uid, e.target.dataset.id);
           } else {
             like(uid, e.target.dataset.id);

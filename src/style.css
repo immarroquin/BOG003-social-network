@@ -160,7 +160,6 @@ color: white;
  color: #333;
 }
 #btn-register:hover{
-
   box-shadow: 4px 6px 4px 6px #1f1e1eef, 0 4px 0 8px #3b3b3bef;
 }
 
@@ -168,7 +167,7 @@ color: white;
   color: rgb(255, 238, 0);
 }
 
-#modalContent {
+#modalContent { /*Modal de confirmación para correo registrado con exito*/
 height: 240px;
 width: 310px;
 background-color: rgba(185, 180, 180, 0.900);
@@ -179,7 +178,7 @@ flex-direction: column;
 align-items: center;
 }
 
-#textModal {
+#textModal { /*Texto de la modal de confirmación para correo registrado con exito*/
   font-family: 'Roboto', sans-serif;
   font-size: 25px;
   font-weight: bolder;
@@ -189,123 +188,15 @@ align-items: center;
 
 }
 
-.img-check {
+.img-check { 
   width: 100px;
   margin-top: 15px;
 }
-
-#modal-background-post{
-  height: 100vh;
-    width: 100%;
-    position: fixed;
-    z-index: 4;
-    background-color: rgba(63, 63, 63, 0.664);
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-#modal-content-post {
-  width: 90%;
-  height: auto;
-  background-color: rgb(255, 255, 255);
-  position: fixed;
-  border-radius: 20px;
-  display: none;
-  align-items: center;
-  flex-direction: column;
-  top: 80px;
-}
-#after-line{
-padding: 5%;
-display: flex;
-flex-direction: column;
-}
-#input-post{
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  outline: none;
-  height: 150px;
-  margin-top: 5%;
-  font-size: 15px;
-  font-family: 'Roboto', sans-serif;
-}
-  #img-modal-post{
-  width: 50px;
-  height: 50px;
-}
-.img-like{
-  width: 30px;
-}
-#container-selects {
-  position: absolute;
-  width: 20%;
-  top: 20px;
-  right: 5%;
-  display: flex;
-  justify-content: space-around;
-}
-.img-edit, .img-delete {
-  width: 24px;
-}
-#container-modal-delete{
-  height: 100vh;
-    width: 100%;
-    position: fixed;
-    z-index: 4;
-    background-color: rgba(63, 63, 63, 0.664);
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-#modal-content-delete {
-  height: 150px;
-  width: 80%;
-  background-color: rgb(255, 255, 255);
-  border-radius: 20px;
-  position: fixed;
-  display: none;
-  transform: translateY(-50%);
-  top: 50%;
-  z-index: 4;
-  padding: 5%;
-}
-#container-img-exit{
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  margin-bottom: 2%;
-}
-#content-modal-delete{
-  display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    height: 70%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    padding-top: 8px;
-}
-#btn-accept-delete{
-  cursor: pointer;
-    height: 25px;
-    width: 70%;
-    border-radius: 10px;
-    font-family: 'Righteous', cursive;
-    font-size: 20px;
-    background-color: rgb(0,255,171);
-    border: none;
-    outline: none;
-    color: #333;
-    box-shadow: 2px 2px 2px 2px #6f7274;
-}
+/*Inicia estilos del home*/
 #div-home{
   background-color: white;
 }
-#hder{
+#hder{ /*header de home y profile*/
   background-color: rgb(53,52,52);
   height: 50px;
   width: 100%;
@@ -314,25 +205,25 @@ flex-direction: column;
  justify-content: space-around;
  z-index: 1;
 }
-#logo-hder{
+#logo-hder{ /*Logo del header*/
   width: 180px;
 }
-.container-images{
+.container-images{/*container de los iconos home y profile*/
   width: 30%;
  margin-top: 7px;
  display:flex;
  justify-content: space-around;
 }
-#img-home, #img-profile{
+#img-home, #img-profile{ /*imagenes home y profile*/
   width: 35px;
  height: 35px;
 }
-#container-posts{
+#container-posts{ /*main de la ruta home*/
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#container-btn-input{
+#container-btn-input{ /*contenedor de boton con efecto input y de las cards que son cada publicacion*/
   border-radius: 10px;
   margin-top: 80px;
   height: 100px;
@@ -343,11 +234,11 @@ flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
-#img-input{
+#img-input{ /*Imagenes de perfil en el contenedor principal para publicar*/
   width: 60px;
   height: 60px;
 }
-#btn-input-modal{
+#btn-input-modal{/*boton con efecto modal*/
   border: none;
   background-color: rgba(236, 236, 236, 0.925);
   border-radius: 20px;
@@ -363,14 +254,28 @@ flex-direction: column;
 #btn-input-modal:hover{
   background-color: rgba(218, 218, 218, 0.925);
 }
-#div-post{
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: center;
+#modal-background-post{ /*Fondo de la modal para publicar*/
+  height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 4;
+    background-color: rgba(63, 63, 63, 0.664);
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
-#space-line{
+#modal-content-post { /*contenido de la modal para publicar*/
+  width: 90%;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  border-radius: 20px;
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  top: 80px;
+}
+#space-line{ /*div contenedor de texto 'crear publicacion' y la X*/
   display: inline-flex;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
@@ -380,80 +285,54 @@ flex-direction: column;
     justify-content: space-between;
     padding: 7px 20px 7px 20px;
 }
-.btn-exit{
+#container-img-exit{ /*container imagen X*/
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 2%;
+}
+
+.btn-exit{/*imagen X*/
   width: 30px;
 }
-#line{
+#line{/*linea divisora de la modal para publicar*/
   border-top: 1.5px solid rgb(95, 95, 95);
   height: 2px;
   padding: 0;
 }
-.card-post{
-  border-radius: 10px;
-  margin-top: 30px;
-  height: auto;
-  width: 80%;
-  background-color: white;
-  box-shadow: 1px 2px 4px rgb(155, 154, 154);
-  padding: 5%;
-  font-family: 'Roboto', sans-serif;
-  position: relative;
+#after-line{ /*contenedor de elemento despues de la linea divisora en la modal para publicar*/
+padding: 5%;
+display: flex;
+flex-direction: column;
 }
-
-#container-likes {
-  width: 20%;
-  display: inline-flex;
-  align-items: flex-end;
-  justify-content: space-evenly;
-  flex-direction: row-reverse;
-  float: right;
+#container-img-text{ /*Contenedor de la imagen de peril en la modal*/
+  display: flex;
+  align-items: center;
+  width: 90%;
 }
-#img-post{
+#img-modal-post{ /*imagen de peril en la modal*/
   width: 50px;
   height: 50px;
 }
-#container-user-data{
-  display: inline-flex;
-}
-#user-name {
-font-weight: bold;
-color: #333;
-}
-#date{
-  color: rgb(134, 133, 133);
+#container-text p{/*Nombre de usurio en la modal para publicar*/
+  margin-left: 5%;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
-  font-size: 15px;
-  letter-spacing: 1px;
-}
-#description-post{
-  padding: 5%;
-  word-break: break-all;
-}
-
-#container-data{
-  margin: 8px 0 0 10px;
-  
-}
-.btn-green{
-  color: aqua;
-}
-
-#btn-post{
-  margin-top: 5%;
-  cursor: pointer;
-  height: 30px;
-  width: 100%;
-  border-radius: 10px;
-  font-family: 'Righteous', cursive;
-  font-size: 20px;
-  background-color: rgb(0,255,171);
-  border: none;
-  outline: none;
   color: #333;
-  box-shadow: 2px 4px 4px 4px #6f7274;
+  width: 100%;
+}
+#input-post{ /*id de la etiqueta textarea para publicar*/
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  height: 150px;
+  margin-top: 5%;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
 }
 #btn-post :disabled,
-#btn-post[disabled]{
+#btn-post[disabled]{ /*Boton para publicar es estado disable mientras input este vacio 'boton inactivo'*/
   margin-top: 5%;
   cursor: pointer;
   height: 30px;
@@ -467,27 +346,141 @@ color: #333;
   color: rgb(133, 131, 131);
   box-shadow: 0px 0px 0px 0px #6f7274;
 }
-
-#container-img-text{
-  
-  display: flex;
-  align-items: center;
-  width: 90%;
-}
-
-#container-text p{
-  margin-left: 5%;
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  color: #333;
+#btn-post{/*Boton para publicar con inforacion en el input 'boton activo'*/
+  margin-top: 5%;
+  cursor: pointer;
+  height: 30px;
   width: 100%;
+  border-radius: 10px;
+  font-family: 'Righteous', cursive;
+  font-size: 20px;
+  background-color: rgb(0,255,171);
+  border: none;
+  outline: none;
+  color: #333;
+  box-shadow: 2px 4px 4px 4px #6f7274;
 }
-#main-profile {
+#div-post{ /*contenedor de los post*/
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+.card-post{/*Tarjeta y contenedor de cada post*/
+  border-radius: 10px;
+  margin-top: 30px;
+  height: auto;
+  width: 80%;
+  background-color: white;
+  box-shadow: 1px 2px 4px rgb(155, 154, 154);
+  padding: 5%;
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+}
+#container-user-data{/*contenedor de imagen, nombre y fecha en el post*/
+  display: inline-flex;
+}
+#img-post{/*imagen en el post*/
+  width: 50px;
+  height: 50px;
+}
+#container-data{/*contenedor de nombre y fecha en el post*/
+  margin: 8px 0 0 10px;
+}
+#user-name {/*nombre en el post*/
+font-weight: bold;
+color: #333;
+}
+#date{/*fecha en el post*/
+  color: rgb(134, 133, 133);
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+#description-post{/*descripcion en el post*/
+  padding: 5%;
+  word-break: break-all;
+}
+#container-selects { /*contenedor de las imagenes editar y eliminar*/
+  position: absolute;
+  width: 20%;
+  top: 20px;
+  right: 5%;
+  display: flex;
+  justify-content: space-around;
+}
+.img-edit, .img-delete { /*imagenes editar y eliminar*/
+  width: 24px;
+}
+#container-likes {/*contenedor de like texto e imagenes*/
+  width: 20%;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  flex-direction: row-reverse;
+  float: right;
+}
+.img-like{ /*imagenes like*/
+  width: 30px;
+}
+#container-modal-delete{/*Fondo de la modal confirmar, para eliminar el post*/
+  height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 4;
+    background-color: rgba(63, 63, 63, 0.664);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+#modal-content-delete {/*contenido de la modal confirmar, para eliminar el post*/
+  height: 150px;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  position: fixed;
+  display: none;
+  transform: translateY(-50%);
+  top: 50%;
+  z-index: 4;
+  padding: 5%;
+}
+#content-modal-delete{/*contenerdor de texto y boton en la modal confirmar, para eliminar el post*/
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 70%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    padding-top: 8px;
+}
+#btn-accept-delete{/* boton en la modal confirmar, para eliminar el post*/
+  cursor: pointer;
+    height: 25px;
+    width: 70%;
+    border-radius: 10px;
+    font-family: 'Righteous', cursive;
+    font-size: 20px;
+    background-color: rgb(0,255,171);
+    border: none;
+    outline: none;
+    color: #333;
+    box-shadow: 2px 2px 2px 2px #6f7274;
+}
+/*Empieza la seccion profile*/
+#main-profile {/*main de ruta profile*/
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#container-user-profile{
+#img-user-profile {
+  width: 120px;
+}
+#container-user-profile{/*contenedor del nombre de usuario en profile*/
   margin-top: 100px;
     height: 180px;
     width: 90%;
@@ -500,16 +493,13 @@ color: #333;
     color: #333;
     font-weight: bolder;
 }
-#img-user-profile {
-  width: 120px;
-}
-#imgprofile-functions{
+#imgprofile-functions{/*imagen central en la ruta profile 'proximanete mas funciones'*/
   width: 350px;
   margin-top: 25%;
-border-radius: 20px;
-box-shadow: 2px 2px 2px 2px #919292;
+ border-radius: 20px;
+ box-shadow: 2px 2px 2px 2px #919292;
 }
-#btn-signout{
+#btn-signout{/*boton para cerrar sesion*/
   margin: 14%;
   cursor: pointer;
   height: 30px;
@@ -523,39 +513,39 @@ box-shadow: 2px 2px 2px 2px #919292;
   color:white;
   box-shadow: 2px 2px 2px 2px #919292;
 }
-#footers{
+#footers{/*footer en ruta home y profile*/
   font-size: 12px;
   padding: 10px;
   color: #6C6C6C;
   text-align: center;
 }
 @media only screen and (min-width: 600px) and (max-width: 900px) {
-  .img-logo-white { /*Logos*/
+  .img-logo-white { 
     width: 300px;
     margin-top:13%;
   }
-  .input-login { /*contenedor padre de los input de login*/
+  .input-login { 
     margin-top: 5%;
   }
   #email,
-  #password {  /*input de login*/
+  #password {  
     width: 260px;
     height: 30px;
     margin-top: 10%;
   }
-  #btn-login{ /*botones de logueo y registro*/
+  #btn-login{ 
     height: 30px;
     width: 230px;
     font-size: 20px;
   }
-  .div-login {  /*contenedor de boton, parrafos y logo google login*/
+  .div-login {  
     margin-top: 3%;
   }
   .div-login p{ 
     font-size: 20px;
     margin-top: 10%;
 }
-.btn-google{  /*boton contenedor del logo de google para logueo y registro*/
+.btn-google{  
   margin-top: 5%;
   width: 80px;
   }
@@ -633,15 +623,15 @@ box-shadow: 2px 2px 2px 2px #919292;
 }
 }
 @media only screen and (min-width: 901px) and (max-width: 1650px) {
-  .img-logo-white { /*Logos*/
+  .img-logo-white { 
     width: 500px;
     margin-top:10%;
   }
-    .div-login {  /*contenedor de boton, parrafos y logo google login*/
+    .div-login {  
       margin-top: 2%;
     }
     #email,
-    #password {  /*input de login*/
+    #password {  
       width: 410px;
       height: 47px;
     }
@@ -649,7 +639,7 @@ box-shadow: 2px 2px 2px 2px #919292;
       margin-top: 15%;
       font-size: 28px;
     }
-    #btn-login{ /*botones de logueo y registro*/
+    #btn-login{ 
       height: 45px;
       width: 320px;
       font-size: 28px;

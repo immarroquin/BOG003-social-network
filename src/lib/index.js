@@ -36,6 +36,7 @@ export const authLogin = () => {
 };
 
 export const signOut = () => {
+  // Funcion signOut para cerra sesion usa el metodo signOut() de firebase
   const logOut = firebase.auth().signOut()
     .then(() => {
       window.location.href = '';
@@ -44,8 +45,11 @@ export const signOut = () => {
 };
 
 export const loginGoogle = () => {
+  // Funcion loginGoogle para iniciar sesion con google
   const provider = new firebase.auth.GoogleAuthProvider();
+  // metodo GoogleAuthProvider() para autenticar con credenciales de googlede firebase
   return firebase.auth().signInWithPopup(provider)
+  // signInWithPopup() metodo para iniciar sesion por ventada modal con credenciales de google
     .then(() => {
       window.location.href = '#/home';
     });
@@ -53,6 +57,7 @@ export const loginGoogle = () => {
 
 // Comienzo de Firestore
 export const post = (describe, nameuid, uid) => {
+  // funcion post con metodo .add() para crear coleccion
   const db = firebase.firestore();
   db.collection('posts').add({
     description: describe,
@@ -64,17 +69,22 @@ export const post = (describe, nameuid, uid) => {
 };
 
 export const getPosts = () => firebase.firestore().collection('posts').orderBy('currentDate', 'desc');
+// funcion getPosts con metodo orderBy() para ordenar post de acuerdo a fecha
 
 export const deletePost = (idPost) => firebase.firestore().collection('posts').doc(idPost).delete();
+// funcion deletePost con metodo delete() para eliminar el documento de la coleccion
 
 export const getPost = (id) => firebase.firestore().collection('posts').doc(id).get();
+// funcion getPost con metodo get() para traer el documento de la coleccion de acuerdo a su id
 
 export const updatePost = (id, updatePosts) => firebase.firestore().collection('posts').doc(id).update(updatePosts);
+// funcion con metodo update() para actualizar el doc de la coleccion de acuerdo a su id
 
 export const like = (uid, idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
   likes: firebase.firestore.FieldValue.arrayUnion(uid),
 }));
-
+// funcion like con metodo arrayUnion() para agregar elementos (uid) a un array
 export const dislike = (uid, idPost) => firebase.firestore().collection('posts').doc(idPost).update(({
   likes: firebase.firestore.FieldValue.arrayRemove(uid),
 }));
+// funcion con metodo arrayRemove() para quitar elementos (uid) de cada elemento dado
