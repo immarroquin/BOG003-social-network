@@ -18,10 +18,10 @@
 
 Laboratorian es una red social dirigida a egresadas, estudiantes, equipo e interesadxs de la experiencia que ofrece el bootcamp, con el fin de que lxs usuarixs puedan compartir sus experiencias relacionadas con Laboratoria.
 
-#### * Quiénes son los principales usuarios de producto
+* **Quiénes son los principales usuarios de producto**
 Estudiantes, Egresadas, integrantes  del equipo y personas interesadas de la experiencia que ofrece Laboratoria.
 
-#### * Qué problema resuelve el producto
+* **Qué problema resuelve el producto**
 Promueve el fortalecimiento de la comunidad, integra a quienes se interesan por la experiencia en Laboratoria, motiva e inspira a quienes inician en el proceso por medio de las experiencias compartidas.
 
 
@@ -110,7 +110,7 @@ Realizamos investigacion UX a traves de una encuesta para conocer  nuestro usuar
 ![imagen Feed](./src/img/muro.png)
 ![imagen Profile](./src/img/profileapp.png)
 
-[Prototipo Figma](https://dimarbu.github.io/BOG003-social-network/src/)
+[Laboratorians](https://dimarbu.github.io/BOG003-social-network/src/)
 
 ## 7. Test Unitario
 
