@@ -71,3 +71,33 @@ describe('loginGoogle', () => {
     });
   });
 });
+
+const { mockFirebase } = require('firestore-jest-mock');
+
+mockFirebase({
+  database: {
+    posts: [{
+      description: 'Hola Laboratorians', nameUser: 'Lorena Marroquin', uidUser: 'HnIJfvtFvFcXDLxLMhOGNqQ7myk2', currentDate: '14/9/2021', likes: '',
+    },
+    {
+      description: 'Estoy muy feliz', nameUser: 'Gabriela Paez', uidUser: 'dM6cypkuaRfde3EXmRRuPCh6o7i1', currentDate: '13/9/2021', likes: '',
+    }],
+  },
+});
+
+// const { mockCollection } = require('firestore-jest-mock/mocks/firestore');
+
+describe('post', () => {
+  const db = firebase.firestore();
+  it('debería ser una función', () => {
+    expect(typeof post).toBe('function');
+  });
+  it('Debería obtener los posts', () => {
+    db.collection('posts')
+      .get()
+      .then((userDocs) => {
+        expect(post()).toHaveBeenCalledWith('post');
+        expect(userDocs.doc.data().nameUser).toEqual();
+      });
+  });
+});

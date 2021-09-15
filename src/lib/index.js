@@ -8,7 +8,7 @@ export const authEmailAndPassword = (email, password, names) => {
         displayName: names,
       }).then(() => {
         const configurationUrlEmail = {
-          url: 'http://localhost:5000',
+          url: 'https://dimarbu.github.io/BOG003-social-network/src/',
         };
         firebase.auth().currentUser.sendEmailVerification(configurationUrlEmail);
         // Metodo sendEmailVerification para enviar correo de verificación al registrarse

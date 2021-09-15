@@ -134,23 +134,19 @@ cursor: pointer;
   width: 280px;
   text-align: center;
   letter-spacing: 2px;
-  
 }
 .div-register{  /*contenedor de boton, parrafos y logo google register*/
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
-  
 }
-
 .div-register p{ 
 font-size: 22px;
 margin-top: 7%;
 font-family: 'Roboto', sans-serif;
 color: white;
 }
-
 #btn-register{ /*botones de logueo y registro*/
   cursor: pointer;
   height: 45px;
@@ -319,8 +315,7 @@ flex-direction: column;
  z-index: 1;
 }
 #logo-hder{
-  width: 40%;
- 
+  width: 180px;
 }
 .container-images{
   width: 30%;
@@ -534,30 +529,112 @@ box-shadow: 2px 2px 2px 2px #919292;
   color: #6C6C6C;
   text-align: center;
 }
-@media only screen and (min-width: 620px) and (max-width: 900px) {
+@media only screen and (min-width: 600px) and (max-width: 900px) {
   .img-logo-white { /*Logos*/
-    width: 67%;
-    margin-top:9%;
+    width: 300px;
+    margin-top:13%;
   }
   .input-login { /*contenedor padre de los input de login*/
     margin-top: 5%;
   }
   #email,
   #password {  /*input de login*/
-    width: 370px;
-    height: 50px;
+    width: 260px;
+    height: 30px;
     margin-top: 10%;
   }
+  #btn-login{ /*botones de logueo y registro*/
+    height: 30px;
+    width: 230px;
+    font-size: 20px;
+  }
   .div-login {  /*contenedor de boton, parrafos y logo google login*/
-    margin-top: 5%;
+    margin-top: 3%;
   }
   .div-login p{ 
-    font-size: 29px;
+    font-size: 20px;
+    margin-top: 10%;
+}
+.btn-google{  /*boton contenedor del logo de google para logueo y registro*/
+  margin-top: 5%;
+  width: 80px;
+  }
+  #img-google{
+    width: 35px;
+}
+#errorMessageLogin {
+  font-size: 17px;
+}
+.container-div-register {
+  height: 140vh;
+}
+#name-register, #email-register, #password-register {
+  width: 258px;
+  height: 30px;
+  margin-top: 8%;
+  font-size: 15px;
+}
+.div-register {
+  margin-top: 4%;
+}
+#btn-register {
+  height: 30px;
+    width: 230px;
+    font-size: 20px;
+}
+#errorMessageRegister {
+  margin-top: 4%;
+  font-size: 17px;
+  width: 310px;
+}
+.div-register p {
+  font-size: 20px;
+  margin-top: 12%;
+}
+#hder {
+  height: 60px;
+}
+#logo-hder{
+  width: 200px;
+}
+.container-images {
+  margin-top: 11px;
+}
+#img-home, #img-profile {
+  width: 40px;
+  height: 40px;
+}
+#container-btn-input {
+  width: 80%;
+  margin-top: 90px;
+}
+#btn-input-modal {
+  font-size: 16px;
+}
+#modal-content-post {
+  width: 80%;
+  font-size: 20px;
+}
+#input-post {
+  font-size: 20px;
+}
+.card-post {
+  font-size: 18px;
+  width: 70%;
+}
+#modal-content-delete {
+  width: 70%;
+}
+#btn-accept-delete {
+  width: 60%;
+}
+#footers {
+  font-size: 18px;
 }
 }
-@media only screen and (min-width: 901px) and (max-width: 1350px) {
+@media only screen and (min-width: 901px) and (max-width: 1650px) {
   .img-logo-white { /*Logos*/
-    width: 50%;
+    width: 500px;
     margin-top:10%;
   }
     .div-login {  /*contenedor de boton, parrafos y logo google login*/
@@ -565,16 +642,122 @@ box-shadow: 2px 2px 2px 2px #919292;
     }
     #email,
     #password {  /*input de login*/
-      width: 390px;
-      height: 50px;
+      width: 410px;
+      height: 47px;
     }
     .div-login p{ 
-      margin-top: 10%;
-        font-size: 35px;
+      margin-top: 15%;
+      font-size: 28px;
     }
     #btn-login{ /*botones de logueo y registro*/
-      height: 50px;
-      width: 270px;
+      height: 45px;
+      width: 320px;
       font-size: 28px;
+    }
+    #img-google{
+      width: 50px;
+  }
+    #errorMessageLogin {
+      font-size: 22px;
+    }
+    .container-div-register {
+      height: 140vh;
+    }
+    #name-register, #email-register, #password-register {
+      width: 410px;
+    height: 47px;
+    font-size: 18px;
+    }
+    .div-register {
+      margin-top: 2%;
+    }
+    #btn-register {
+      height: 45px;
+      width: 320px;
+      font-size: 28px;
+    }
+    #errorMessageRegister {
+      margin-top: 4%;
+      font-size: 17px;
+      width: 310px;
+    }
+    .div-register p {
+      font-size: 25px;
+    }
+    #hder {
+      height: 70px;
+    }
+    #logo-hder{
+      width: 290px;
+    }
+    .container-images {
+      margin-top: 12px;
+    }
+    #img-home, #img-profile {
+      width: 45px;
+      height: 45px;
+    }
+    #container-btn-input {
+      width: 70%;
+      margin-top: 110px;
+    }
+    #btn-input-modal {
+      font-size: 18px;
+      height: 50px;
+    }
+    #modal-content-post {
+      width: 50%;
+      font-size: 23px;
+    }
+    #input-post {
+      font-size: 23px;
+    }
+    #btn-post {
+      height: 35px;
+      width: 80%;
+      font-size: 20px;
+      margin-left: 58px;
+  }
+    #btn-post :disabled, #btn-post[disabled] {
+      height: 35px;
+      width: 80%;
+      font-size: 20px;
+      margin-left: 58px;
+  }
+    .card-post {
+      font-size: 23px;
+      width: 60%;
+    }
+    .img-edit, .img-delete {
+      width: 33px;
+  }
+  .img-like {
+    width: 33px;
+}
+    #modal-content-delete {
+      width: 40%;
+    }
+    .btn-exit {
+      width: 35px;
+  }
+    #content-modal-delete {
+      font-size: 23px;
+  }
+    #btn-accept-delete {
+      width: 60%;
+      height: 30px;
+    }
+    #imgprofile-functions {
+      width: 550px;
+      margin-top: 20%;
+  }
+    #btn-signout {
+      margin: 10%;
+      height: 35px;
+      width: 25%;
+      font-size: 23px;
+  }
+    #footers {
+      font-size: 20px;
     }
 }
