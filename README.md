@@ -127,4 +127,3 @@ Realizamos investigacion UX a traves de una encuesta para conocer  nuestro usuar
 * [x] eslint y jest
 * [x] Firebase y firestore
 * [x] mocks
-
