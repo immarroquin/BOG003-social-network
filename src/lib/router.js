@@ -1,47 +1,33 @@
-import {
-  login,
-} from './view/login.js';
-import {
-  register,
-} from './view/register.js';
-import {
-  home,
-} from './view/home.js';
-import {
-  profile,
-} from './view/profile.js';
+import { login } from "./view/login.js";
+import { register } from "./view/register.js";
+import { home } from "./view/home.js";
+import { profile } from "./view/profile.js";
+import { add } from "./view/add.js";
 
-const showTemplate = (hash) => {
-  const containerRoot = document.getElementById('container');
-  containerRoot.innerHTML = '';
+export const showTemplate = (hash) => {
+  const containerRoot = document.getElementById("container");
+  containerRoot.innerHTML = "";
 
   switch (hash) {
-    case '':
+    case "":
       containerRoot.appendChild(login());
       break;
-    case '#/register':
+    case "#/register":
       containerRoot.appendChild(register());
       break;
-    case '#/home':
+    case "#/home":
       containerRoot.appendChild(home());
       break;
-    case '#/profile':
+    case "#/profile":
       containerRoot.appendChild(profile());
       break;
+    case "#/add":      
+      setTimeout(() => {
+        containerRoot.appendChild(add());
+        containerRoot.appendChild(home());
+      }, 500);
+      break;
     default:
-      containerRoot.innerHTML = 'Ups Error 404';
+      containerRoot.innerHTML = "Ups Error 404";
   }
-};
-
-export const changeRoute = (hash) => {
-  if (hash === '#/') {
-    return showTemplate(hash);
-  } if (hash === '#/register') {
-    return showTemplate(hash);
-  } if (hash === '#/home') {
-    return showTemplate(hash);
-  } if (hash === '#/profile') {
-    return showTemplate(hash);
-  }
-  return showTemplate(hash);
 };

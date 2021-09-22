@@ -1,9 +1,7 @@
 import {
-  post,
   getPosts,
   deletePost,
   getPost,
-  updatePost,
   like,
   dislike,
 } from '../index.js';
@@ -26,23 +24,6 @@ export const home = () => {
    <img id='img-input' src='img/profile.png' alt='profile'>
   <button type='button' id='btn-input-modal'>Cuentanos tu experiencia Laboratorians</button>
   </div>
-   <div id='modal-background-post'>
-    <div id='modal-content-post'>
-    <div id='space-line'>
-    <p>Crear Publicación</p>
-    <img src='img/exit.png' class='btn-exit'>
-    </div>
-    <div id='line'></div>
-    <div id='after-line'>
-    <div id='container-img-text'>
-    <img id='img-modal-post' src='img/profile.png' alt='profile'>
-    <div id='container-text'></div>
-    </div>
-    <textarea type='text' id='input-post' placeholder='Cuentanos tu experiencia laboratorians'></textarea>
-      <button disabled type='button' id='btn-post' class='btn-post-inactive'>PUBLICAR</button>
-    </div>
-   </div>
-  </div>
   </div>
   <div id='div-post'></div>
   <div id='container-modal-delete'></div>
@@ -56,56 +37,10 @@ export const home = () => {
   divHome.innerHTML = viewHome;
   const btnInputModal = divHome.querySelector('#btn-input-modal');
   btnInputModal.addEventListener('click', () => { // evento que mostrara la modal para publicar
-    document.querySelector('#modal-background-post').style.display = 'flex';
-    document.querySelector('#modal-content-post').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    document.querySelector('#input-post').focus();
-    document.querySelector('#input-post').value = '';
+    window.location.hash = '#/add';
   });
 
-  const inputPost = divHome.querySelector('#input-post');
-  inputPost.addEventListener('keyup', () => { // evento del textarea
-    const valueInput = inputPost.value.trim();
-    // trim() metodo que no permite activar boton con espacio
-    if (valueInput === '') {
-      document.querySelector('#btn-post').disabled = true; // boton publicar inactivo
-    } else {
-      document.querySelector('#btn-post').disabled = false; // boton publicar activo
-    }
-  });
-
-  const btnPost = divHome.querySelector('#btn-post'); // boton publicar
-  btnPost.addEventListener('click', async () => {
-    const describe = document.querySelector('#input-post').value; // describe como valor del input
-    const nameuid = firebase.auth().currentUser.displayName;
-    const uid = firebase.auth().currentUser.uid;
-    document.body.style.overflow = 'visible';
-    if (describe !== '') { // validacion de input vacio
-      document.querySelector('#input-post').value = '';
-      if (!editStatus) {
-        await post(describe, nameuid, uid);
-      } else {
-        await updatePost(id, {
-          description: describe, // describe como valor del input y como valor del objeto
-          nameUser: nameuid,
-          uidUser: uid,
-          currentDate: new Date(),
-        });
-      }
-      editStatus = false;
-      document.querySelector('#btn-post').innerText = 'PUBLICAR';
-      document.querySelector('#modal-background-post').style.display = 'none';
-      document.querySelector('#modal-content-post').style.display = 'none';
-    }
-    document.querySelector('#btn-post').disabled = true;
-  });
   getPosts().onSnapshot((response) => {
-    const nameuid = firebase.auth().currentUser.displayName;
-    const divContainerText = document.querySelector('#container-text');
-    divContainerText.innerHTML = '';// Template que imprime nombre de usuario en modal publicar
-    divContainerText.innerHTML += `
-    <p>${nameuid}</p>
-    `;
     const uid = firebase.auth().currentUser.uid;
     const divPosts = document.querySelector('#div-post');
     divPosts.innerHTML = '';
